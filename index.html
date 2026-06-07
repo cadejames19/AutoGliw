@@ -34,6 +34,7 @@
       <a href="#services">Services</a>
       <a href="#why">Why Us</a>
       <a href="#book">Book</a>
+      <button type="button" class="nav-account" id="navAccount">Sign In</button>
     </nav>
     <a href="#book" class="btn btn-primary nav-cta">Book Now</a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
@@ -331,6 +332,11 @@
               <input type="text" id="bwAddress" name="address" placeholder="123 Main St, City" autocomplete="street-address" />
               <small class="bw-err" data-err="address"></small>
             </div>
+            <div class="field">
+              <label for="bwEmail">Email <span class="bw-opt">(optional — booking updates &amp; account access)</span></label>
+              <input type="email" id="bwEmail" name="email" placeholder="jane@email.com" autocomplete="email" />
+              <small class="bw-err" data-err="email"></small>
+            </div>
             <details class="bw-notes">
               <summary>Anything we should know? <span class="bw-opt">(optional)</span></summary>
               <textarea id="bwNotes" rows="2" placeholder="Gate code, pet hair, that mystery smell…"></textarea>
@@ -354,6 +360,7 @@
             </div>
             <h3 id="tkTitle">You're booked!</h3>
             <p class="bw-tk-sub">We'll text you shortly to confirm.</p>
+            <p class="bw-save" id="bwSaveState" aria-live="polite"></p>
             <div class="bw-tear" aria-hidden="true"></div>
             <dl class="bw-tk-rows">
               <div><dt>When</dt><dd id="tkWhen">—</dd></div>
@@ -395,6 +402,39 @@
     <p class="copyright">© <span id="year"></span> Auto Glow Detailing. All rights reserved.</p>
   </footer>
 
+  <!-- Sign-in modal -->
+  <div class="ag-overlay" id="agAuth" aria-hidden="true">
+    <div class="ag-box" role="dialog" aria-modal="true" aria-labelledby="agAuthTitle">
+      <button class="ag-x" data-ag-close aria-label="Close">×</button>
+      <h3 id="agAuthTitle">Sign in to Auto Glow</h3>
+      <p class="ag-sub">No passwords — we email you a code.</p>
+      <div id="agStepEmail">
+        <input class="bw-input" type="email" id="agEmail" placeholder="jane@email.com" autocomplete="email" />
+        <button class="btn btn-primary btn-block" id="agSend">Email me a code</button>
+      </div>
+      <div id="agStepCode" hidden>
+        <input class="bw-input" type="text" id="agCode" inputmode="numeric" placeholder="6-digit code" />
+        <button class="btn btn-primary btn-block" id="agVerify">Verify &amp; sign in</button>
+      </div>
+      <p class="ag-msg" id="agAuthMsg"></p>
+    </div>
+  </div>
+
+  <!-- My details panel -->
+  <div class="ag-overlay" id="agPanel" aria-hidden="true">
+    <div class="ag-box ag-wide" role="dialog" aria-modal="true" aria-labelledby="agPanelTitle">
+      <button class="ag-x" data-ag-close aria-label="Close">×</button>
+      <h3 id="agPanelTitle">My Details</h3>
+      <p class="ag-sub" id="agWho"></p>
+      <div id="agBookings"></div>
+      <div class="ag-panel-foot">
+        <a href="admin.html" id="agAdminLink" hidden class="btn btn-primary">Open Master Dashboard</a>
+        <button class="btn btn-ghost" id="agSignOut">Sign out</button>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js?v=10"></script>
+  <script type="module" src="account.js?v=10"></script>
 </body>
 </html>

@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
       service: "Express Detail", price: 80,
       size: "", car: "", cond: "",
       date: null, dateLabel: "", time: "",
-      name: "", phone: "", pref: "Text", address: "", notes: "",
+      name: "", phone: "", pref: "Text", address: "", notes: "", email: "",
     };
     const steps = [...bwForm.querySelectorAll(".bw-step")];
     const fill = document.getElementById("bwFill");
@@ -169,11 +169,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const nameIn = document.getElementById("bwName");
     const phoneIn = document.getElementById("bwPhone");
     const addrIn = document.getElementById("bwAddress");
+    const emailIn2 = document.getElementById("bwEmail");
     const notesIn = document.getElementById("bwNotes");
     carIn.addEventListener("input", () => { state.car = carIn.value.trim(); setErr("car", ""); syncSummary(); });
     nameIn.addEventListener("input", () => { state.name = nameIn.value.trim(); setErr("name", ""); });
     addrIn.addEventListener("input", () => { state.address = addrIn.value.trim(); setErr("address", ""); syncSummary(); });
     notesIn.addEventListener("input", () => (state.notes = notesIn.value.trim()));
+    emailIn2.addEventListener("input", () => {
+      state.email = emailIn2.value.trim();
+      setErr("email", "");
+    });
     // phone formats as you type
     phoneIn.addEventListener("input", () => {
       const digits = phoneIn.value.replace(/\D/g, "").slice(0, 10);
@@ -223,6 +228,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!state.name) { setErr("name", "We need a name."); ok = false; }
         if (state.phone.replace(/\D/g, "").length < 10) { setErr("phone", "Enter a valid phone number."); ok = false; }
         if (!state.address) { setErr("address", "Where's the car?"); ok = false; }
+        if (state.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) { setErr("email", "That email doesn't look right."); ok = false; }
       }
       return ok;
     };
@@ -266,8 +272,8 @@ document.addEventListener("DOMContentLoaded", () => {
           }, 200 + i * 90);
         }
       }
-      // payload is backend-ready:
-      // fetch("/api/bookings", { method: "POST", body: JSON.stringify(state) })
+      // hand off to account.js → Supabase
+      window.dispatchEvent(new CustomEvent("ag:booking", { detail: { ...state } }));
     });
 
     function makeIcs() {
