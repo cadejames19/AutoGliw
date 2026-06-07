@@ -44,6 +44,34 @@ document.addEventListener("DOMContentLoaded", () => {
     reveals.forEach((el) => el.classList.add("visible"));
   }
 
+  // Sticky mobile CTA: show after hero, hide while booking section is visible
+  const mobileCta = document.getElementById("mobileCta");
+  const bookSection = document.getElementById("book");
+  if (mobileCta && bookSection) {
+    let pastHero = false;
+    let bookingVisible = false;
+    const updateCta = () =>
+      mobileCta.classList.toggle("show", pastHero && !bookingVisible);
+
+    const heroEl = document.getElementById("home");
+    if ("IntersectionObserver" in window && heroEl) {
+      new IntersectionObserver(
+        ([e]) => {
+          pastHero = !e.isIntersecting;
+          updateCta();
+        },
+        { threshold: 0.35 }
+      ).observe(heroEl);
+      new IntersectionObserver(
+        ([e]) => {
+          bookingVisible = e.isIntersecting;
+          updateCta();
+        },
+        { threshold: 0.18 }
+      ).observe(bookSection);
+    }
+  }
+
   // Booking form
   const form = document.getElementById("bookForm");
   const modal = document.getElementById("modal");
