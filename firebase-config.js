@@ -1,12 +1,11 @@
 // ===== Auto Glow — Firebase web config =====
-// Paste the config object from Firebase Console →
-//   Project settings (gear) → "Your apps" → Web app → SDK setup → Config.
 // These values are safe to expose publicly (Firestore security rules protect data).
 export const firebaseConfig = {
-  apiKey: "PASTE_API_KEY",
-  authDomain: "PASTE.firebaseapp.com",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID",
+  apiKey: "AIzaSyBDmbwOfwmdu_1ilDHoBY-y0wVqVqYajds",
+  authDomain: "auto-glow-6a634.firebaseapp.com",
+  projectId: "auto-glow-6a634",
+  storageBucket: "auto-glow-6a634.firebasestorage.app",
+  messagingSenderId: "48865391010",
+  appId: "1:48865391010:web:036596139c835d2a8cc2fb",
+  measurementId: "G-19HR4C96V8",
 };
