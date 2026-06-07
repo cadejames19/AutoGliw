@@ -19,11 +19,14 @@ python3 -m http.server 8000  # then visit http://localhost:8000
 
 ## Architecture
 
-Three files, each with a single responsibility:
+Core files, each with a single responsibility:
 
 - `index.html` — all page structure and content. Sections in order: navbar, hero (`#home`, with a tilting 3D phone mockup playing a mini booking loop, inline SVG cartoon car behind it), services (`#services`), why-us (`#why`), booking form (`#book`), confirmation modal (`#modal`), sticky mobile CTA (`#mobileCta`), footer. JS hooks into elements by `id`; styling uses classes.
 - `styles.css` — theme, layout, and all animations. Design tokens (royal blue/black palette, radii, shadows, easing) are CSS custom properties on `:root` at the top of the file; use them rather than hard-coding values. Includes a `prefers-reduced-motion` block that must keep covering any new animations.
-- `script.js` — all behavior, in one `DOMContentLoaded` handler: navbar scroll state, mobile menu, IntersectionObserver scroll reveals (`.reveal` → `.visible`), sticky mobile CTA show/hide, booking form validation, and the confirmation modal.
+- `script.js` — all 2D behavior, in one `DOMContentLoaded` handler: navbar scroll state, mobile menu, IntersectionObserver scroll reveals (`.reveal` → `.visible`), sticky mobile CTA show/hide, booking form validation, the confirmation modal, and the hero phone (tilt + mini booking loop).
+- `showroom.js` — ES module (Three.js via CDN importmap pinned to 0.160.0) rendering the interactive 3D Aventador showroom in `#showroom`: studio HDRI environment, blurred Reflector floor, scissor doors / steering / headlights driven by node names in the glTF (`Obj_Side_Doors`, `Obj_Tyre_FL`, etc.). Lazy-boots via IntersectionObserver. Axis/orientation of the model is detected at runtime, not hardcoded.
+- `models/` — vendored glTF car model (MIT, see `models/aventador/LICENSE-NOTE.md`) and CC0 studio HDRI. ~14 MB total; don't re-encode casually.
+- `references/` — gitignored local SVJ reference library (`REFERENCE-NOTES.md` + images) used to validate the 3D render against the real car.
 
 ## Conventions
 
