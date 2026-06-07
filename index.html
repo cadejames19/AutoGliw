@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Auto Glow — premium mobile car detailing. Book your Express Detail today and let your car shine." />
+  <title>Auto Glow — Premium Car Detailing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Animated background -->
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <a href="#home" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13" /><path d="M3 13h18v4a1 1 0 0 1-1 1h-1a2 2 0 0 1-4 0H9a2 2 0 0 1-4 0H4a1 1 0 0 1-1-1z" /></svg>
+      </span>
+      <span class="brand-text">Auto<span class="brand-accent">Glow</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#book">Book</a>
+    </nav>
+    <a href="#book" class="btn btn-primary nav-cta">Book Now</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">✦ Premium Mobile Detailing</span>
+        <h1>Make your ride <span class="shine">glow</span> like new.</h1>
+        <p class="hero-sub">
+          Showroom shine, every time. Auto Glow brings expert detailing
+          straight to your driveway. Book in seconds, ride in style.
+        </p>
+        <div class="hero-actions">
+          <a href="#book" class="btn btn-primary btn-lg">Book Express Detail</a>
+          <a href="#services" class="btn btn-ghost btn-lg">See Services</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>2k+</strong><span>Cars Detailed</span></div>
+          <div><strong>4.9★</strong><span>Avg Rating</span></div>
+          <div><strong>60min</strong><span>Express Time</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="car-stage">
+          <div class="glow-ring"></div>
+          <div class="car-emoji" aria-hidden="true">🚗</div>
+          <span class="sparkle s1">✦</span>
+          <span class="sparkle s2">✧</span>
+          <span class="sparkle s3">✦</span>
+          <span class="sparkle s4">✧</span>
+          <div class="price-tag">
+            <span class="price-label">Express Detail</span>
+            <span class="price-value">$80</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><span></span></div>
+  </section>
+
+  <!-- Services -->
+  <section class="services section" id="services">
+    <div class="section-head reveal">
+      <span class="eyebrow">Our Services</span>
+      <h2>One detail. Total transformation.</h2>
+      <p>Crafted to fit your schedule and leave your car gleaming.</p>
+    </div>
+
+    <div class="service-grid">
+      <article class="service-card featured reveal">
+        <div class="ribbon">Most Popular</div>
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5.2L20 8l-4 4 1 6-5-2.8L7 18l1-6-4-4 5.6-.8z"/></svg>
+        </div>
+        <h3>Express Detail</h3>
+        <p class="service-desc">A fast, thorough refresh inside and out — perfect for a quick shine before the weekend.</p>
+        <ul class="service-features">
+          <li>Hand wash &amp; dry</li>
+          <li>Wheel &amp; tire shine</li>
+          <li>Interior vacuum</li>
+          <li>Dash &amp; console wipe-down</li>
+          <li>Glass cleaning</li>
+        </ul>
+        <div class="service-price"><span class="amount">$80</span><span class="per">/ vehicle</span></div>
+        <a href="#book" class="btn btn-primary btn-block">Book This Detail</a>
+      </article>
+
+      <div class="service-side reveal">
+        <div class="mini-card">
+          <span class="mini-icon">⚡</span>
+          <h4>Fast Turnaround</h4>
+          <p>In and out in about 60 minutes so you can get back on the road.</p>
+        </div>
+        <div class="mini-card">
+          <span class="mini-icon">🧴</span>
+          <h4>Premium Products</h4>
+          <p>Paint-safe, eco-friendly formulas that protect your finish.</p>
+        </div>
+        <div class="mini-card">
+          <span class="mini-icon">📍</span>
+          <h4>We Come to You</h4>
+          <p>Home, office, anywhere — we detail at your convenience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section class="why section" id="why">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why Auto Glow</span>
+      <h2>Detailing done right.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <span class="why-num">01</span>
+        <h3>Trained Pros</h3>
+        <p>Experienced detailers who treat every car like their own.</p>
+      </div>
+      <div class="why-item reveal">
+        <span class="why-num">02</span>
+        <h3>Spotless Results</h3>
+        <p>Attention to every corner, crevice, and contour — guaranteed.</p>
+      </div>
+      <div class="why-item reveal">
+        <span class="why-num">03</span>
+        <h3>Easy Booking</h3>
+        <p>Pick a time, drop your details, and you're set in under a minute.</p>
+      </div>
+      <div class="why-item reveal">
+        <span class="why-num">04</span>
+        <h3>Satisfaction First</h3>
+        <p>Not glowing? We'll make it right. That's the Auto Glow promise.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <section class="book section" id="book">
+    <div class="book-card reveal">
+      <div class="book-info">
+        <span class="eyebrow">Book Your Detail</span>
+        <h2>Let's make it <span class="shine">shine</span>.</h2>
+        <p>Fill in your details and we'll confirm your Express Detail appointment.</p>
+        <ul class="book-points">
+          <li>✓ Express Detail — <strong>$80</strong></li>
+          <li>✓ Flexible scheduling, 7 days a week</li>
+          <li>✓ No payment required to book</li>
+        </ul>
+      </div>
+
+      <form class="book-form" id="bookForm" novalidate>
+        <div class="field">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+          <small class="error" data-for="name"></small>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@email.com" required />
+            <small class="error" data-for="email"></small>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required />
+            <small class="error" data-for="phone"></small>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="carMake">Car Make</label>
+            <input type="text" id="carMake" name="carMake" placeholder="Toyota" required />
+            <small class="error" data-for="carMake"></small>
+          </div>
+          <div class="field">
+            <label for="carModel">Car Model</label>
+            <input type="text" id="carModel" name="carModel" placeholder="Camry" required />
+            <small class="error" data-for="carModel"></small>
+          </div>
+        </div>
+        <div class="field">
+          <label for="service">Service</label>
+          <select id="service" name="service">
+            <option value="Express Detail — $80">Express Detail — $80</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="date">Preferred Date</label>
+            <input type="date" id="date" name="date" required />
+            <small class="error" data-for="date"></small>
+          </div>
+          <div class="field">
+            <label for="time">Preferred Time</label>
+            <input type="time" id="time" name="time" required />
+            <small class="error" data-for="time"></small>
+          </div>
+        </div>
+        <div class="field">
+          <label for="address">Service Address</label>
+          <input type="text" id="address" name="address" placeholder="123 Main St, City" required />
+          <small class="error" data-for="address"></small>
+        </div>
+        <div class="field">
+          <label for="notes">Notes <span class="optional">(optional)</span></label>
+          <textarea id="notes" name="notes" rows="2" placeholder="Anything we should know?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Confirm Booking</button>
+        <p class="form-foot">We'll reach out to confirm your appointment shortly.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-check" aria-hidden="true">
+        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" /><path d="M14 27l8 8 16-16" /></svg>
+      </div>
+      <h3 id="modalTitle">Booking Confirmed! 🎉</h3>
+      <p id="modalBody">Thanks for choosing Auto Glow. We'll be in touch soon to confirm your detail.</p>
+      <button class="btn btn-primary" id="modalClose">Awesome</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13" /><path d="M3 13h18v4a1 1 0 0 1-1 1h-1a2 2 0 0 1-4 0H9a2 2 0 0 1-4 0H4a1 1 0 0 1-1-1z" /></svg>
+        </span>
+        <span class="brand-text">Auto<span class="brand-accent">Glow</span></span>
+      </div>
+      <p class="footer-tag">Premium mobile car detailing. Book in seconds, ride in style.</p>
+      <div class="footer-contact">
+        <a href="tel:+15551234567">(555) 123-4567</a>
+        <a href="mailto:hello@autoglow.com">hello@autoglow.com</a>
+      </div>
+    </div>
+    <p class="copyright">© <span id="year"></span> Auto Glow Detailing. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
