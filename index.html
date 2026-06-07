@@ -70,166 +70,227 @@
               <span class="streak st2"></span>
               <span class="streak st3"></span>
               <div class="car-settle"><div class="car-vib">
-                <svg class="super-car" id="superCar" viewBox="0 0 760 300" role="img" aria-label="Interactive royal blue supercar">
+<svg class="super-car" id="superCar" viewBox="0 0 800 320" role="img" aria-label="Interactive royal blue supercar">
                   <defs>
                     <linearGradient id="scPaint" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#4d7dff" />
-                      <stop offset="0.4" stop-color="#2a5ce0" />
-                      <stop offset="0.78" stop-color="#15307c" />
-                      <stop offset="1" stop-color="#0a1c4e" />
+                      <stop offset="0" stop-color="#5d87f0" />
+                      <stop offset="0.38" stop-color="#3a63d8" />
+                      <stop offset="0.72" stop-color="#1c3a94" />
+                      <stop offset="1" stop-color="#0d1f55" />
+                    </linearGradient>
+                    <linearGradient id="scSky" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#dbe7ff" stop-opacity="0.5" />
+                      <stop offset="0.34" stop-color="#dbe7ff" stop-opacity="0.08" />
+                      <stop offset="0.55" stop-color="#dbe7ff" stop-opacity="0" />
+                    </linearGradient>
+                    <linearGradient id="scCore" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#0a1a45" stop-opacity="0" />
+                      <stop offset="0.5" stop-color="#081538" stop-opacity="0.55" />
+                      <stop offset="1" stop-color="#05102e" stop-opacity="0.85" />
                     </linearGradient>
                     <linearGradient id="scGlass" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#1d2f5e" />
-                      <stop offset="1" stop-color="#070d22" />
+                      <stop offset="0" stop-color="#141f3e" />
+                      <stop offset="1" stop-color="#04081a" />
                     </linearGradient>
-                    <linearGradient id="scSkirt" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0" stop-color="#0a1734" />
-                      <stop offset="1" stop-color="#050b1c" />
-                    </linearGradient>
+                    <radialGradient id="archAO" cx="0.5" cy="0.5" r="0.5">
+                      <stop offset="0.62" stop-color="#020610" stop-opacity="0.85" />
+                      <stop offset="1" stop-color="#020610" stop-opacity="0" />
+                    </radialGradient>
                     <linearGradient id="scBeamG" x1="1" y1="0" x2="0" y2="0">
-                      <stop offset="0" stop-color="#cfe4ff" stop-opacity="0.3" />
+                      <stop offset="0" stop-color="#cfe4ff" stop-opacity="0.28" />
                       <stop offset="1" stop-color="#cfe4ff" stop-opacity="0" />
                     </linearGradient>
                     <linearGradient id="scSweepG" x1="0" y1="0" x2="1" y2="0">
                       <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
-                      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.35" />
+                      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.3" />
                       <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
                     </linearGradient>
                     <radialGradient id="scShadow" cx="0.5" cy="0.5" r="0.5">
-                      <stop offset="0" stop-color="#01030f" stop-opacity="0.5" />
+                      <stop offset="0" stop-color="#01030f" stop-opacity="0.55" />
                       <stop offset="1" stop-color="#01030f" stop-opacity="0" />
                     </radialGradient>
-                    <linearGradient id="reflFade" x1="0" y1="242" x2="0" y2="300" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stop-color="#ffffff" stop-opacity="0.7" />
+                    <radialGradient id="discSheen" cx="0.4" cy="0.4" r="0.7">
+                      <stop offset="0" stop-color="#3d4760" />
+                      <stop offset="1" stop-color="#222a3e" />
+                    </radialGradient>
+                    <linearGradient id="reflFade" x1="0" y1="254" x2="0" y2="312" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#ffffff" stop-opacity="0.6" />
                       <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
                     </linearGradient>
-                    <mask id="reflMask"><rect x="-100" y="240" width="960" height="70" fill="url(#reflFade)" /></mask>
+                    <mask id="reflMask"><rect x="-100" y="252" width="1000" height="70" fill="url(#reflFade)" /></mask>
                     <clipPath id="scBodyClip"><use href="#scBodyPath" /></clipPath>
-                    <path id="apPath" d="M288,142 C302,116 324,101 354,97 L402,95 L402,224 L292,226 C287,198 285,168 288,142 Z" />
+                    <path id="apPath" d="M294,156 C310,120 340,102 374,98 L404,96 L404,226 L298,228 C292,208 291,182 294,156 Z" />
                     <clipPath id="apClip"><use href="#apPath" /></clipPath>
+                    <path id="doorCut" d="M295,152 C328,154 366,153 402,150 C405,180 404,206 401,226 L298,228 C293,208 292,180 295,152 Z" />
+                    <clipPath id="doorClip"><use href="#doorCut" /></clipPath>
+                    <path id="doorGlassShape" d="M298,153 C314,121 342,104 374,100 L402,99 L402,151 C364,153 328,154 298,153 Z" />
+                    <clipPath id="doorGlassClip"><use href="#doorGlassShape" /></clipPath>
                   </defs>
 
-                  <ellipse cx="370" cy="242" rx="290" ry="14" fill="url(#scShadow)" />
+                  <ellipse cx="380" cy="254" rx="300" ry="13" fill="url(#scShadow)" />
+                  <ellipse cx="210" cy="251" rx="44" ry="5" fill="#000409" opacity="0.5" />
+                  <ellipse cx="560" cy="251" rx="44" ry="5" fill="#000409" opacity="0.5" />
 
                   <g id="scCar">
-                    <!-- headlight beam (only with lights on) -->
-                    <polygon class="beam" points="50,174 -140,150 -140,214 52,196" fill="url(#scBeamG)" />
+                    <polygon class="beam" points="84,178 -130,152 -130,212 86,196" fill="url(#scBeamG)" />
 
-                    <!-- body -->
-                    <path id="scBodyPath" d="M40,192 C38,180 46,170 64,166 C124,154 184,148 246,144 C272,112 304,96 342,93 L452,91 C492,91 524,98 552,110 C584,123 614,133 644,139 L668,143 C686,147 694,156 692,168 C690,184 682,198 666,206 C648,214 622,218 600,220 L104,226 C80,226 58,219 48,210 C40,202 40,198 40,192 Z" fill="url(#scPaint)" />
-
-                    <!-- shoulder sheen -->
-                    <path d="M70,168 C200,152 420,146 640,142 L640,147 C420,151 200,158 72,174 Z" fill="#ffffff" opacity="0.1" />
-
-                    <!-- rocker + arches + nose shade -->
-                    <g clip-path="url(#scBodyClip)">
-                      <rect x="80" y="208" width="540" height="20" fill="url(#scSkirt)" />
-                      <circle cx="200" cy="196" r="54" fill="#04070f" />
-                      <circle cx="566" cy="196" r="56" fill="#04070f" />
-                      <path d="M40,170 C36,186 38,202 50,214 C42,200 42,182 46,168 Z" fill="#0b2058" />
+                    <!-- ===== body artwork (door is a clipped clone of this) ===== -->
+                    <g id="bodyArt">
+                      <path id="scBodyPath" d="M68,196 C66,188 70,180 84,176 C110,168 150,161 184,157 C196,155 206,154 214,155 C236,156 262,157 288,158 C310,118 340,100 376,96 C404,92 444,91 474,94 C506,98 528,108 552,124 C560,130 564,136 568,141 C580,143 606,145 640,147 L668,145 C680,144 686,150 686,160 C686,176 682,192 672,202 C660,215 640,222 616,224 L132,230 C104,230 84,226 74,216 C66,208 66,202 68,196 Z" fill="url(#scPaint)" />
+                      <g clip-path="url(#scBodyClip)">
+                        <!-- sky reflection on upper surfaces -->
+                        <use href="#scBodyPath" fill="url(#scSky)" />
+                        <!-- core side shadow -->
+                        <rect x="40" y="170" width="680" height="62" fill="url(#scCore)" />
+                        <!-- rocker carbon band -->
+                        <rect x="120" y="222" width="520" height="10" fill="#080c18" />
+                        <!-- wheel arch ambient occlusion + openings -->
+                        <circle cx="210" cy="206" r="62" fill="url(#archAO)" />
+                        <circle cx="560" cy="206" r="64" fill="url(#archAO)" />
+                        <circle cx="210" cy="206" r="53" fill="#02050e" />
+                        <circle cx="560" cy="206" r="55" fill="#02050e" />
+                        <!-- tail panel darkening -->
+                        <rect x="648" y="140" width="45" height="90" fill="#0a1638" opacity="0.55" />
+                      </g>
+                      <!-- beltline specular -->
+                      <path d="M214,154 C300,156 420,150 562,141" stroke="#d5e4ff" stroke-width="1.5" opacity="0.4" fill="none" />
+                      <path d="M100,172 C150,165 190,160 214,158" stroke="#e8f1ff" stroke-width="1.2" opacity="0.3" fill="none" />
+                      <!-- windshield sliver + A-pillar -->
+                      <path d="M288,158 C308,120 338,101 374,97 L388,96 C352,102 322,124 302,158 Z" fill="url(#scGlass)" />
+                      <path d="M296,158 C314,122 344,103 380,98 L388,97 C354,104 326,126 308,158 Z" fill="url(#scPaint)" opacity="0.9" />
+                      <!-- rear quarter glass -->
+                      <path d="M410,97 L450,95 C474,96 494,102 512,111 C500,122 478,129 452,131 L410,132 Z" fill="url(#scGlass)" />
+                      <path d="M420,128 L448,99 L459,100 L432,129 Z" fill="#ffffff" opacity="0.07" />
+                      <!-- side intake + blade -->
+                      <path d="M488,168 L522,162 C528,162 531,166 530,170 L526,196 L494,200 Z" fill="#060d22" />
+                      <path d="M486,178 L530,172 L530,179 L487,185 Z" fill="#2853c4" />
+                      <!-- headlight -->
+                      <g class="headlight">
+                        <path d="M82,178 L130,170 L138,180 L92,188 Z" fill="#0a1430" />
+                        <path d="M86,180 L128,173 L130,177 L88,184 Z" fill="#e8f2ff" />
+                        <circle cx="104" cy="180" r="4" fill="#cfe0ff" />
+                        <circle class="hit" cx="100" cy="186" r="34" fill="transparent" />
+                      </g>
+                      <!-- front intake + splitter -->
+                      <path d="M76,206 L140,200 L144,216 L84,222 Z" fill="#060d22" />
+                      <path d="M80,210 L138,205 M82,216 L140,211" stroke="#10204a" stroke-width="1.5" />
+                      <path d="M70,222 L150,217 L152,225 L76,229 Z" fill="#0b1226" />
+                      <path d="M70,222 L150,217" stroke="#3a63d8" stroke-width="1" opacity="0.5" />
+                      <!-- taillight LED bar -->
+                      <path d="M664,152 L686,156 L685,167 L663,163 Z" fill="#e8203c" />
+                      <path d="M666,155 L684,158 L684,161 L666,158 Z" fill="#ff6b7e" />
+                      <!-- exhaust + diffuser -->
+                      <circle cx="646" cy="226" r="5" fill="#05080f" stroke="#9aa6c0" stroke-width="1.5" />
+                      <circle cx="662" cy="224" r="5" fill="#05080f" stroke="#9aa6c0" stroke-width="1.5" />
+                      <path d="M620,219 L620,228 M632,218 L632,227" stroke="#0a0e1c" stroke-width="3" />
                     </g>
 
                     <!-- puddle light -->
-                    <ellipse class="puddle" cx="344" cy="246" rx="50" ry="6" fill="#cfe4ff" opacity="0" />
+                    <ellipse class="puddle" cx="350" cy="258" rx="48" ry="6" fill="#cfe4ff" opacity="0" />
 
-                    <!-- cabin interior -->
+                    <!-- ===== cabin interior (revealed by the door) ===== -->
                     <g clip-path="url(#apClip)">
-                      <use href="#apPath" fill="#0d0a07" />
-                      <path class="far-glass" d="M296,138 C308,116 328,103 354,100 L398,99 L398,136 Z" fill="#1b2a50" opacity="0.9" />
-                      <path d="M288,148 C300,144 310,144 318,149 L318,170 L288,172 Z" fill="#191309" />
-                      <ellipse cx="321" cy="168" rx="5" ry="13" fill="none" stroke="#cdbb96" stroke-width="3" />
-                      <rect x="352" y="114" width="18" height="13" rx="6" fill="#e6d6b2" />
-                      <path d="M350,129 C346,149 346,173 352,194 L369,192 C366,171 366,148 368,131 Z" fill="#e6d6b2" stroke="#b39a6d" stroke-width="1" />
-                      <path d="M346,194 L385,190 C391,196 391,204 385,208 L350,210 C344,204 344,198 346,194 Z" fill="#dcc9a0" stroke="#b39a6d" stroke-width="1" />
-                      <ellipse class="dome" cx="364" cy="102" rx="8" ry="3" fill="#ffe9b8" opacity="0" />
-                    </g>
-
-                    <!-- A-pillar -->
-                    <path d="M276,141 C294,114 320,99 350,96 L362,95 C330,99 306,116 290,142 Z" fill="url(#scPaint)" />
-
-                    <!-- rear canopy -->
-                    <path d="M404,94 L450,93 C478,94 504,101 528,112 C512,126 488,134 458,137 C438,139 420,140 404,141 Z" fill="url(#scGlass)" />
-                    <path d="M418,136 L448,100 L459,101 L429,136 Z" fill="#ffffff" opacity="0.08" />
-
-                    <!-- side intake -->
-                    <path d="M488,156 L520,151 L526,182 L494,186 Z" fill="#0a1838" />
-
-                    <!-- nose details -->
-                    <g class="headlight">
-                      <path d="M48,176 L92,170 L96,177 L54,183 Z" fill="#dfeaff" />
-                      <circle class="hit" cx="70" cy="182" r="32" fill="transparent" />
-                    </g>
-                    <path d="M46,196 L96,192 L99,204 L52,208 Z" fill="#081226" />
-                    <path d="M42,210 L102,206 L104,213 L48,216 Z" fill="#0c1530" />
-
-                    <!-- tail -->
-                    <path d="M676,150 L690,152 L689,166 L675,164 Z" fill="#e8364f" />
-                    <circle cx="640" cy="221" r="4.5" fill="#0b1126" stroke="#33405f" stroke-width="1.2" />
-                    <circle cx="654" cy="220" r="4.5" fill="#0b1126" stroke="#33405f" stroke-width="1.2" />
-                    <g class="puffs">
-                      <circle class="puff p1" cx="668" cy="220" r="6" fill="#aab8d8" opacity="0" />
-                      <circle class="puff p2" cx="670" cy="222" r="8" fill="#8fa0c8" opacity="0" />
-                      <circle class="puff p3" cx="672" cy="218" r="5" fill="#c4d2ee" opacity="0" />
-                    </g>
-                    <g class="flames">
-                      <path class="flame f1" d="M664,217 C678,213 688,217 696,222 C688,226 678,228 666,224 Z" fill="#ff9d3b" opacity="0" />
-                      <path class="flame f2" d="M666,219 C676,217 684,219 690,222 C684,225 676,225 668,223 Z" fill="#5b8cff" opacity="0" />
-                    </g>
-                    <g class="spoiler">
-                      <path d="M606,120 L670,114 L674,122 L610,128 Z" fill="#11244f" />
-                      <path d="M618,128 L621,139 M656,123 L659,135" stroke="#0a1430" stroke-width="4" />
+                      <use href="#apPath" fill="#0b0805" />
+                      <path class="far-glass" d="M302,150 C316,122 342,106 374,102 L400,101 L400,148 Z" fill="#18244a" opacity="0.85" />
+                      <path d="M296,158 C306,152 316,152 322,158 L322,176 L296,178 Z" fill="#14100a" />
+                      <ellipse cx="314" cy="170" rx="5" ry="15" fill="none" stroke="#d8c49a" stroke-width="3.5" />
+                      <path d="M352,128 C346,126 342,130 343,136 C338,148 336,162 338,178 C339,190 342,198 348,202 L368,200 C364,182 363,160 365,140 C366,132 360,128 352,128 Z" fill="#e2d2ac" stroke="#b39a6d" stroke-width="1" />
+                      <path d="M340,202 C354,198 372,197 384,199 C390,203 390,210 384,213 L348,214 C341,210 338,206 340,202 Z" fill="#d6c298" stroke="#b39a6d" stroke-width="1" />
+                      <path d="M344,150 C342,162 342,176 344,188" stroke="#b39a6d" stroke-width="1" fill="none" opacity="0.8" />
+                      <ellipse class="dome" cx="370" cy="105" rx="7" ry="2.5" fill="#ffe9b8" opacity="0" />
                     </g>
 
                     <!-- shine sweep + polish wipe -->
-                    <g clip-path="url(#scBodyClip)"><rect class="sweep" x="20" y="60" width="170" height="180" fill="url(#scSweepG)" /></g>
-                    <g clip-path="url(#scBodyClip)"><rect class="wipe" x="0" y="55" width="90" height="190" fill="url(#scSweepG)" opacity="0" /></g>
+                    <g clip-path="url(#scBodyClip)"><rect class="sweep" x="20" y="60" width="170" height="190" fill="url(#scSweepG)" /></g>
+                    <g clip-path="url(#scBodyClip)"><rect class="wipe" x="0" y="55" width="90" height="200" fill="url(#scSweepG)" opacity="0" /></g>
                     <g class="wipe-sparks"></g>
 
-                    <!-- wheels -->
-                    <g class="wheel" transform="translate(200,196)">
-                      <circle r="44" fill="#0b0e16" />
-                      <circle r="30" fill="#11182c" />
-                      <rect class="caliper" x="16" y="-13" width="9" height="26" rx="4" fill="#1f3a8a" opacity="0.9" />
-                      <g class="spokes" fill="#cfd9ee">
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(72)" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(144)" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(216)" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(288)" />
-                      </g>
-                      <circle r="30" fill="none" stroke="#aebbda" stroke-width="2" />
-                      <circle r="7" fill="#1a2440" stroke="#8fa0c4" stroke-width="1.5" />
+                    <!-- puffs / flames / spoiler -->
+                    <g class="puffs">
+                      <circle class="puff p1" cx="676" cy="224" r="6" fill="#aab8d8" opacity="0" />
+                      <circle class="puff p2" cx="678" cy="226" r="8" fill="#8fa0c8" opacity="0" />
+                      <circle class="puff p3" cx="680" cy="222" r="5" fill="#c4d2ee" opacity="0" />
                     </g>
-                    <g class="wheel" transform="translate(566,196)">
-                      <circle r="44" fill="#0b0e16" />
-                      <circle r="30" fill="#11182c" />
-                      <rect class="caliper" x="16" y="-13" width="9" height="26" rx="4" fill="#1f3a8a" opacity="0.9" />
-                      <g class="spokes" fill="#cfd9ee">
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(72)" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(144)" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(216)" />
-                        <path d="M-3,-28 L3,-28 L5,-6 L-5,-6 Z" transform="rotate(288)" />
-                      </g>
-                      <circle r="30" fill="none" stroke="#aebbda" stroke-width="2" />
-                      <circle r="7" fill="#1a2440" stroke="#8fa0c4" stroke-width="1.5" />
+                    <g class="flames">
+                      <path class="flame f1" d="M672,221 C686,217 696,221 704,226 C696,230 686,232 674,228 Z" fill="#ff9d3b" opacity="0" />
+                      <path class="flame f2" d="M674,223 C684,221 692,223 698,226 C692,229 684,229 676,227 Z" fill="#5b8cff" opacity="0" />
+                    </g>
+                    <g class="spoiler">
+                      <path d="M634,140 L678,136 L681,143 L637,147 Z" fill="#11244f" />
+                      <path d="M644,147 L646,156 M668,143 L670,153" stroke="#0a1430" stroke-width="3.5" />
                     </g>
 
-                    <!-- scissor door -->
-                    <g class="sc-door">
-                      <path class="door-panel" d="M286,146 C322,144 364,144 402,144 L400,224 L292,226 C287,198 285,170 286,146 Z" fill="url(#scPaint)" />
-                      <path d="M286,146 C322,144 364,144 402,144" stroke="#0a1838" stroke-width="1.2" fill="none" opacity="0.6" />
-                      <rect x="314" y="156" width="20" height="5" rx="2.5" fill="#0c1f3f" />
-                      <g clip-path="url(#apClip)">
-                        <path class="door-glass" d="M288,141 C304,113 328,99 358,96 L402,94 L402,141 C360,143 316,143 288,141 Z" fill="url(#scGlass)" />
-                        <path class="door-glass-streak" d="M306,134 L342,101 L356,101 L318,136 Z" fill="#ffffff" opacity="0.1" />
+                    <!-- ===== wheels ===== -->
+                    <g class="wheel" transform="translate(210,206)">
+                      <circle r="46" fill="#0c0f17" />
+                      <circle r="44" fill="none" stroke="#1a2030" stroke-width="2" />
+                      <circle r="31" fill="#0a0f1f" />
+                      <circle r="20" fill="url(#discSheen)" />
+                      <circle r="20" fill="none" stroke="#141a2a" stroke-width="1.5" />
+                      <rect class="caliper" x="13" y="-11" width="8" height="22" rx="3.5" fill="#14306e" />
+                      <g class="spokes">
+                        <g fill="#d6dff2">
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(36)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(72)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(108)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(144)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(180)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(216)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(252)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(288)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(324)" />
+                        </g>
                       </g>
-                      <path class="mirror" d="M284,134 L270,124 L259,126 L270,138 Z" fill="url(#scPaint)" />
+                      <circle r="31" fill="none" stroke="#b9c6e2" stroke-width="1.5" />
+                      <circle r="6" fill="#10182e" stroke="#8693b4" stroke-width="1.5" />
+                    </g>
+                    <g class="wheel" transform="translate(560,206)">
+                      <circle r="46" fill="#0c0f17" />
+                      <circle r="44" fill="none" stroke="#1a2030" stroke-width="2" />
+                      <circle r="31" fill="#0a0f1f" />
+                      <circle r="20" fill="url(#discSheen)" />
+                      <circle r="20" fill="none" stroke="#141a2a" stroke-width="1.5" />
+                      <rect class="caliper" x="13" y="-11" width="8" height="22" rx="3.5" fill="#14306e" />
+                      <g class="spokes">
+                        <g fill="#d6dff2">
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(36)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(72)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(108)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(144)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(180)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(216)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(252)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(288)" />
+                          <path d="M-2.5,-30 L2.5,-30 L4,-6 L-4,-6 Z" transform="rotate(324)" />
+                        </g>
+                      </g>
+                      <circle r="31" fill="none" stroke="#b9c6e2" stroke-width="1.5" />
+                      <circle r="6" fill="#10182e" stroke="#8693b4" stroke-width="1.5" />
+                    </g>
+
+                    <!-- ===== scissor door: clipped clone of the body art = seamless when closed ===== -->
+                    <g class="sc-door">
+                      <g clip-path="url(#doorClip)"><use href="#bodyArt" /></g>
+                      <!-- hairline seams -->
+                      <use href="#doorCut" fill="none" stroke="#050d24" stroke-width="1" opacity="0.65" />
+                      <!-- flush handle -->
+                      <rect x="336" y="170" width="24" height="5" rx="2.5" fill="#0d1d45" />
+                      <path d="M336,176 L360,176" stroke="#4d6fc4" stroke-width="0.8" opacity="0.5" />
+                      <!-- side window (rolls down into the door) -->
+                      <g clip-path="url(#doorGlassClip)">
+                        <path class="door-glass" d="M298,153 C314,121 342,104 374,100 L402,99 L402,151 C364,153 328,154 298,153 Z" fill="url(#scGlass)" />
+                        <path class="door-glass-streak" d="M316,146 L350,107 L362,107 L326,148 Z" fill="#ffffff" opacity="0.09" />
+                      </g>
+                      <!-- mirror -->
+                      <path d="M300,150 L290,141" stroke="#1c3a94" stroke-width="2.5" />
+                      <path class="mirror" d="M292,136 C284,129 273,129 268,135 C271,141 282,144 291,142 Z" fill="url(#scPaint)" />
                     </g>
                   </g>
 
-                  <!-- floor reflection -->
-                  <use href="#scCar" transform="translate(0,480) scale(1,-1)" mask="url(#reflMask)" opacity="0.12" pointer-events="none" />
+                  <!-- showroom floor reflection -->
+                  <use href="#scCar" transform="translate(0,508) scale(1,-1)" mask="url(#reflMask)" opacity="0.1" pointer-events="none" />
                 </svg>
               </div></div>
               </div>
