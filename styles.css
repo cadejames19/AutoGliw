@@ -82,11 +82,11 @@ img, svg { display: block; }
   border-bottom: 1px solid var(--line);
 }
 .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.brand-mark {
-  display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px;
-  background: linear-gradient(135deg, var(--royal-bright), var(--royal-deep));
-  color: #fff; box-shadow: var(--glow);
+.brand-logo {
+  width: 44px; height: 44px; border-radius: 50%;
+  box-shadow: 0 0 18px rgba(47, 107, 255, 0.35);
 }
+.footer .brand-logo { width: 40px; height: 40px; }
 .brand-text { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; }
 .brand-accent { color: var(--royal-light); }
 .nav-links { display: flex; gap: 30px; }
@@ -483,12 +483,12 @@ img, svg { display: block; }
 .bw-chip:focus-visible, .bw-tier:focus-visible { outline: 2px solid var(--royal-light); outline-offset: 2px; }
 
 /* inputs */
-.bw-input, .field input, .field textarea {
+.bw-input, .field input, .field textarea, .bw-notes textarea {
   width: 100%; padding: 13px 16px; border-radius: 12px; font-size: 0.95rem; font-family: inherit;
   background: rgba(10, 15, 33, 0.7); border: 1px solid var(--line); color: var(--text);
   transition: border-color 0.25s, box-shadow 0.25s;
 }
-.bw-input:focus, .field input:focus, .field textarea:focus {
+.bw-input:focus, .field input:focus, .field textarea:focus, .bw-notes textarea:focus {
   outline: none; border-color: var(--royal-bright); box-shadow: 0 0 0 3px rgba(47, 107, 255, 0.22);
 }
 .field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
@@ -524,6 +524,7 @@ img, svg { display: block; }
 }
 .bw-notes summary { cursor: pointer; font-size: 0.88rem; color: var(--royal-light); margin: 4px 0 10px; }
 .bw-notes textarea { resize: vertical; }
+.bw-notes textarea::placeholder, .bw-input::placeholder, .field input::placeholder { color: rgba(154, 166, 199, 0.55); }
 
 /* ticket */
 .bw-ticket { display: grid; place-items: center; animation: bwStepIn 0.5s var(--ease); }
