@@ -668,7 +668,11 @@ img, svg { display: block; }
   .service-side { display: grid; gap: 12px; }
   .service-card { padding: 26px 22px; }
 
-  /* booking: the bw-card IS the card; flatten the inner panels */
+  /* wizard: compact intro (summary moves to the end as a review block) */
+  .bw-review-label { margin-top: 22px; }
+  .bw-summary-review { margin-top: 8px; }
+
+    /* booking: the bw-card IS the card; flatten the inner panels */
   .book.section { padding: 0; margin: 0; }
   .bw-card { display: block; padding: 0; overflow: hidden; }
   .bw-rail {

@@ -99,6 +99,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const labels = [...document.querySelectorAll("#bwLabels li")];
     let current = 1;
 
+    // On mobile, move the live order summary out of the top rail to the end of
+    // the wizard (a review block right before "Confirm Booking").
+    if (window.matchMedia("(max-width: 900px)").matches) {
+      const summary = document.querySelector(".bw-summary");
+      const step3 = bwForm.querySelector('.bw-step[data-step="3"]');
+      const step3Nav = step3?.querySelector(".bw-nav");
+      if (summary && step3 && step3Nav) {
+        const review = document.createElement("p");
+        review.className = "bw-label bw-review-label";
+        review.textContent = "Review your booking";
+        summary.classList.add("bw-summary-review");
+        step3.insertBefore(review, step3Nav);
+        step3.insertBefore(summary, step3Nav);
+      }
+    }
+
     // --- error helpers
     const setErr = (key, msg) => {
       const el = bwForm.querySelector(`[data-err="${key}"]`);
