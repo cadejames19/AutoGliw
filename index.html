@@ -63,8 +63,83 @@
         <div class="phone-scene" id="phoneScene">
           <div class="glow-pod" aria-hidden="true"></div>
 
+          <div class="phone-tilt" id="phoneTilt">
+            <div class="phone">
+              <span class="phone-island" aria-hidden="true"></span>
+              <span class="phone-btn pbtn-power" aria-hidden="true"></span>
+              <span class="phone-btn pbtn-vol1" aria-hidden="true"></span>
+              <span class="phone-btn pbtn-vol2" aria-hidden="true"></span>
+              <div class="phone-screen" id="phoneScreen" aria-hidden="true">
+                <div class="mini-nav">
+                  <span class="mini-brand">
+                    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13" /><path d="M3 13h18v4a1 1 0 0 1-1 1h-1a2 2 0 0 1-4 0H9a2 2 0 0 1-4 0H4a1 1 0 0 1-1-1z" /></svg>
+                    Auto<b>Glow</b>
+                  </span>
+                  <span class="mini-burger"><i></i><i></i><i></i></span>
+                </div>
+                <div class="mini-viewport">
+                  <div class="mini-pages">
+                    <div class="mini-page mini-home">
+                      <span class="mini-eyebrow">✦ Premium Mobile Detailing</span>
+                      <h4>Make your ride <span class="mini-shine">glow</span> like new.</h4>
+                      <p>Expert detailing straight to your driveway.</p>
+                      <svg class="mini-car" viewBox="0 0 220 86">
+                        <defs>
+                          <linearGradient id="mBodyGrad" x1="0" y1="0" x2="0.35" y2="1">
+                            <stop offset="0" stop-color="#5b8cff" />
+                            <stop offset="0.5" stop-color="#2f6bff" />
+                            <stop offset="1" stop-color="#14307f" />
+                          </linearGradient>
+                        </defs>
+                        <ellipse cx="110" cy="74" rx="86" ry="6" fill="#02061e" opacity="0.45" />
+                        <path d="M22 56 C20 48 26 45 34 44 C40 36 50 33 62 32 C72 27 84 23 100 23 L126 23 C141 23 151 28 158 36 C168 39 180 41 187 43 C196 45 200 48 200 53 C200 58 197 60 192 60 L34 60 C26 60 23 59 22 56 Z" fill="url(#mBodyGrad)" stroke="#0c1f57" stroke-width="1" />
+                        <path d="M70 34 C78 26 88 24 100 24 L124 24 C135 25 142 29 147 34 Z" fill="#101b3e" />
+                        <circle cx="64" cy="60" r="13" fill="#070b16" />
+                        <circle cx="160" cy="60" r="13" fill="#070b16" />
+                        <circle cx="64" cy="60" r="6.5" fill="#9db9ff" />
+                        <circle cx="160" cy="60" r="6.5" fill="#9db9ff" />
+                      </svg>
+                      <div class="mini-stats">
+                        <span><b>2k+</b>Cars Detailed</span>
+                        <span><b>4.9★</b>Avg Rating</span>
+                        <span><b>60min</b>Express</span>
+                      </div>
+                      <span class="mini-btn" id="miniBookBtn">Book Express Detail</span>
+                    </div>
+                    <div class="mini-page mini-book">
+                      <h5>Book Your <span class="mini-shine">Detail</span></h5>
+                      <div class="mini-service">Express Detail · <b>$80</b></div>
+                      <div class="mini-field"><label>Full Name</label><span class="mini-input" id="mfName"></span></div>
+                      <div class="mini-field"><label>Car</label><span class="mini-input" id="mfCar"></span></div>
+                      <div class="mini-row">
+                        <div class="mini-field"><label>Date</label><span class="mini-input" id="mfDate"></span></div>
+                        <div class="mini-field"><label>Time</label><span class="mini-input" id="mfTime"></span></div>
+                      </div>
+                      <span class="mini-btn" id="miniConfirmBtn">Confirm Booking</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="mini-modal" id="miniModal">
+                  <div class="mini-modal-card">
+                    <span class="mini-check">✓</span>
+                    <b>Booking Confirmed! 🎉</b>
+                    <span class="mini-modal-sub" id="miniModalSub">Sat · 10:00 AM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="sparkle s1">✦</span>
+          <span class="sparkle s2">✧</span>
+          <span class="sparkle s3">✦</span>
+          <span class="sparkle s4">✧</span>
+        </div>
+      </div>
+    </div>
           <div class="car-lane" aria-hidden="true">
             <div class="car-drive" id="carDrive">
+              <div class="car-unit">
               <span class="streak st1"></span>
               <span class="streak st2"></span>
               <span class="streak st3"></span>
@@ -202,83 +277,10 @@
                   <use href="#scCar" transform="translate(0,500) scale(1,-1)" mask="url(#reflMask)" opacity="0.16" />
                 </svg>
               </div></div>
-            </div>
-          </div>
-
-          <div class="phone-tilt" id="phoneTilt">
-            <div class="phone">
-              <span class="phone-island" aria-hidden="true"></span>
-              <span class="phone-btn pbtn-power" aria-hidden="true"></span>
-              <span class="phone-btn pbtn-vol1" aria-hidden="true"></span>
-              <span class="phone-btn pbtn-vol2" aria-hidden="true"></span>
-              <div class="phone-screen" id="phoneScreen" aria-hidden="true">
-                <div class="mini-nav">
-                  <span class="mini-brand">
-                    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13" /><path d="M3 13h18v4a1 1 0 0 1-1 1h-1a2 2 0 0 1-4 0H9a2 2 0 0 1-4 0H4a1 1 0 0 1-1-1z" /></svg>
-                    Auto<b>Glow</b>
-                  </span>
-                  <span class="mini-burger"><i></i><i></i><i></i></span>
-                </div>
-                <div class="mini-viewport">
-                  <div class="mini-pages">
-                    <div class="mini-page mini-home">
-                      <span class="mini-eyebrow">✦ Premium Mobile Detailing</span>
-                      <h4>Make your ride <span class="mini-shine">glow</span> like new.</h4>
-                      <p>Expert detailing straight to your driveway.</p>
-                      <svg class="mini-car" viewBox="0 0 220 86">
-                        <defs>
-                          <linearGradient id="mBodyGrad" x1="0" y1="0" x2="0.35" y2="1">
-                            <stop offset="0" stop-color="#5b8cff" />
-                            <stop offset="0.5" stop-color="#2f6bff" />
-                            <stop offset="1" stop-color="#14307f" />
-                          </linearGradient>
-                        </defs>
-                        <ellipse cx="110" cy="74" rx="86" ry="6" fill="#02061e" opacity="0.45" />
-                        <path d="M22 56 C20 48 26 45 34 44 C40 36 50 33 62 32 C72 27 84 23 100 23 L126 23 C141 23 151 28 158 36 C168 39 180 41 187 43 C196 45 200 48 200 53 C200 58 197 60 192 60 L34 60 C26 60 23 59 22 56 Z" fill="url(#mBodyGrad)" stroke="#0c1f57" stroke-width="1" />
-                        <path d="M70 34 C78 26 88 24 100 24 L124 24 C135 25 142 29 147 34 Z" fill="#101b3e" />
-                        <circle cx="64" cy="60" r="13" fill="#070b16" />
-                        <circle cx="160" cy="60" r="13" fill="#070b16" />
-                        <circle cx="64" cy="60" r="6.5" fill="#9db9ff" />
-                        <circle cx="160" cy="60" r="6.5" fill="#9db9ff" />
-                      </svg>
-                      <div class="mini-stats">
-                        <span><b>2k+</b>Cars Detailed</span>
-                        <span><b>4.9★</b>Avg Rating</span>
-                        <span><b>60min</b>Express</span>
-                      </div>
-                      <span class="mini-btn" id="miniBookBtn">Book Express Detail</span>
-                    </div>
-                    <div class="mini-page mini-book">
-                      <h5>Book Your <span class="mini-shine">Detail</span></h5>
-                      <div class="mini-service">Express Detail · <b>$80</b></div>
-                      <div class="mini-field"><label>Full Name</label><span class="mini-input" id="mfName"></span></div>
-                      <div class="mini-field"><label>Car</label><span class="mini-input" id="mfCar"></span></div>
-                      <div class="mini-row">
-                        <div class="mini-field"><label>Date</label><span class="mini-input" id="mfDate"></span></div>
-                        <div class="mini-field"><label>Time</label><span class="mini-input" id="mfTime"></span></div>
-                      </div>
-                      <span class="mini-btn" id="miniConfirmBtn">Confirm Booking</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="mini-modal" id="miniModal">
-                  <div class="mini-modal-card">
-                    <span class="mini-check">✓</span>
-                    <b>Booking Confirmed! 🎉</b>
-                    <span class="mini-modal-sub" id="miniModalSub">Sat · 10:00 AM</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
 
-          <span class="sparkle s1">✦</span>
-          <span class="sparkle s2">✧</span>
-          <span class="sparkle s3">✦</span>
-          <span class="sparkle s4">✧</span>
-        </div>
-      </div>
-    </div>
     <div class="scroll-cue" aria-hidden="true"><span></span></div>
   </section>
 
