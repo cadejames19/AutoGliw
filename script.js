@@ -220,16 +220,36 @@ document.addEventListener("DOMContentLoaded", () => {
       setErr("phone", "");
     });
 
+    // --- service tier selection (Express $80 / Full Detail $150)
+    const tiersEl = document.getElementById("bwTiers");
+    tiersEl?.addEventListener("click", (e) => {
+      const tier = e.target.closest(".bw-tier");
+      if (!tier) return;
+      tiersEl.querySelectorAll(".bw-tier").forEach((t) => {
+        t.classList.remove("selected");
+        t.setAttribute("aria-pressed", "false");
+      });
+      tier.classList.add("selected");
+      tier.setAttribute("aria-pressed", "true");
+      state.service = tier.dataset.service;
+      state.price = Number(tier.dataset.price);
+      syncSummary();
+    });
+
     // --- live summary
     const sum = {
+      service: document.getElementById("sumService"),
       vehicle: document.getElementById("sumVehicle"),
       when: document.getElementById("sumWhen"),
       where: document.getElementById("sumWhere"),
+      price: document.getElementById("sumPrice"),
     };
     function syncSummary() {
+      if (sum.service) sum.service.textContent = state.service;
       sum.vehicle.textContent = [state.size, state.car].filter(Boolean).join(" · ") || "—";
       sum.when.textContent = state.dateLabel && state.time ? `${state.dateLabel} · ${state.time}` : state.dateLabel || "—";
       sum.where.textContent = state.address || "—";
+      if (sum.price) sum.price.textContent = `$${state.price}`;
     }
 
     // --- step engine
@@ -277,9 +297,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!validateStep(3)) return;
 
       document.getElementById("tkTitle").textContent = `You're booked, ${state.name.split(" ")[0]}!`;
+      document.getElementById("tkService").textContent = state.service;
       document.getElementById("tkWhen").textContent = `${state.dateLabel} · ${state.time}`;
       document.getElementById("tkVehicle").textContent = [state.size, state.car].filter(Boolean).join(" · ");
       document.getElementById("tkWhere").textContent = state.address;
+      document.getElementById("tkPrice").textContent = `$${state.price}`;
       document.getElementById("bwIcs").href = makeIcs();
 
       bwForm.hidden = true;

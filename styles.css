@@ -352,7 +352,8 @@ img, svg { display: block; }
 .section-head p { color: var(--muted); font-size: 1.05rem; }
 
 /* ===== Services ===== */
-.service-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 26px; align-items: stretch; }
+.service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; align-items: stretch; }
+.service-benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 26px; }
 .service-card {
   position: relative; background: linear-gradient(160deg, var(--panel-2), var(--panel));
   border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 38px;
@@ -665,7 +666,7 @@ img, svg { display: block; }
   /* services / why cards */
   .service-grid, .why-grid { grid-template-columns: 1fr; gap: 14px; }
   .why-grid { grid-template-columns: 1fr 1fr; }
-  .service-side { display: grid; gap: 12px; }
+  .service-benefits { grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
   .service-card { padding: 26px 22px; }
 
   /* wizard: compact intro (summary moves to the end as a review block) */

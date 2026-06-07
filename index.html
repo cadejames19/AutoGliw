@@ -14,7 +14,7 @@
   <meta property="og:title" content="Auto Glow — Premium Car Detailing" />
   <meta property="og:description" content="Showroom shine, every time. Book your Express Detail in seconds." />
   <meta property="og:image" content="assets/logo.png" />
-  <link rel="stylesheet" href="styles.css?v=16" />
+  <link rel="stylesheet" href="styles.css?v=17" />
 </head>
 <body>
   <!-- Mobile drawer (slides in from the right; page pushes left) -->
@@ -70,8 +70,8 @@
           <a href="#services" class="btn btn-ghost btn-lg">See Services</a>
         </div>
         <div class="hero-stats">
-          <div><strong>2k+</strong><span>Cars Detailed</span></div>
-          <div><strong>4.9★</strong><span>Avg Rating</span></div>
+          <div><strong>40+</strong><span>Cars Detailed</span></div>
+          <div><strong>5★</strong><span>Avg Rating</span></div>
           <div><strong>60min</strong><span>Express Time</span></div>
         </div>
       </div>
@@ -118,8 +118,8 @@
                         <circle cx="160" cy="60" r="6.5" fill="#9db9ff" />
                       </svg>
                       <div class="mini-stats">
-                        <span><b>2k+</b>Cars Detailed</span>
-                        <span><b>4.9★</b>Avg Rating</span>
+                        <span><b>40+</b>Cars Detailed</span>
+                        <span><b>5★</b>Avg Rating</span>
                         <span><b>60min</b>Express</span>
                       </div>
                       <span class="mini-btn" id="miniBookBtn">Book Express Detail</span>
@@ -187,22 +187,39 @@
         <a href="#book" class="btn btn-primary btn-block">Book This Detail</a>
       </article>
 
-      <div class="service-side reveal">
-        <div class="mini-card">
-          <span class="mini-icon">⚡</span>
-          <h4>Fast Turnaround</h4>
-          <p>In and out in about 60 minutes so you can get back on the road.</p>
+      <article class="service-card reveal">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7z"/><path d="M9 12l2 2 4-4"/></svg>
         </div>
-        <div class="mini-card">
-          <span class="mini-icon">🧴</span>
-          <h4>Premium Products</h4>
-          <p>Paint-safe, eco-friendly formulas that protect your finish.</p>
-        </div>
-        <div class="mini-card">
-          <span class="mini-icon">📍</span>
-          <h4>We Come to You</h4>
-          <p>Home, office, anywhere — we detail at your convenience.</p>
-        </div>
+        <h3>Full Detail</h3>
+        <p class="service-desc">The deep, showroom-level treatment — everything in Express, plus paint protection and a full interior deep clean.</p>
+        <ul class="service-features">
+          <li>Everything in Express Detail</li>
+          <li>Clay bar &amp; hand wax</li>
+          <li>Interior deep shampoo</li>
+          <li>Leather clean &amp; condition</li>
+          <li>Streak-free glass &amp; trim dressing</li>
+        </ul>
+        <div class="service-price"><span class="amount">$150</span><span class="per">/ vehicle</span></div>
+        <a href="#book" class="btn btn-ghost btn-block">Book This Detail</a>
+      </article>
+    </div>
+
+    <div class="service-benefits reveal">
+      <div class="mini-card">
+        <span class="mini-icon">⚡</span>
+        <h4>Fast Turnaround</h4>
+        <p>Express in about 60 minutes so you can get back on the road.</p>
+      </div>
+      <div class="mini-card">
+        <span class="mini-icon">🧴</span>
+        <h4>Premium Products</h4>
+        <p>Paint-safe, eco-friendly formulas that protect your finish.</p>
+      </div>
+      <div class="mini-card">
+        <span class="mini-icon">📍</span>
+        <h4>We Come to You</h4>
+        <p>Home, office, anywhere — we detail at your convenience.</p>
       </div>
     </div>
   </section>
@@ -244,7 +261,7 @@
       <aside class="bw-rail">
         <span class="eyebrow">Book Your Detail</span>
         <h2>Let's make it <span class="shine">shine</span>.</h2>
-        <p class="bw-proof"><strong>4.9★</strong> rated · <strong>2,000+</strong> cars detailed</p>
+        <p class="bw-proof"><strong>5★</strong> rated · <strong>40+</strong> cars detailed</p>
         <dl class="bw-summary" aria-live="polite">
           <div class="bw-sum-row"><dt>Service</dt><dd id="sumService">Express Detail</dd></div>
           <div class="bw-sum-row"><dt>Vehicle</dt><dd id="sumVehicle">—</dd></div>
@@ -273,12 +290,13 @@
           <!-- Step 1 -->
           <fieldset class="bw-step active" data-step="1">
             <legend class="bw-q" tabindex="-1">Tell us about your car.</legend>
-            <div class="bw-tiers" role="group" aria-label="Service">
-              <button type="button" class="bw-tier selected" aria-pressed="true">
+            <div class="bw-tiers" id="bwTiers" role="group" aria-label="Service">
+              <button type="button" class="bw-tier selected" data-service="Express Detail" data-price="80" aria-pressed="true">
                 <b>Express Detail</b><span>Inside &amp; out · ~60 min</span><em>$80</em>
               </button>
-              <button type="button" class="bw-tier soon" disabled><b>Full Detail</b><span>Coming soon</span></button>
-              <button type="button" class="bw-tier soon" disabled><b>Ceramic Coat</b><span>Coming soon</span></button>
+              <button type="button" class="bw-tier" data-service="Full Detail" data-price="150" aria-pressed="false">
+                <b>Full Detail</b><span>Deep clean + protection</span><em>$150</em>
+              </button>
             </div>
             <p class="bw-label" id="lblSize">Vehicle size</p>
             <div class="bw-chips" id="bwSize" role="group" aria-labelledby="lblSize">
@@ -376,10 +394,11 @@
             <p class="bw-save" id="bwSaveState" aria-live="polite"></p>
             <div class="bw-tear" aria-hidden="true"></div>
             <dl class="bw-tk-rows">
+              <div><dt>Service</dt><dd id="tkService">—</dd></div>
               <div><dt>When</dt><dd id="tkWhen">—</dd></div>
               <div><dt>Vehicle</dt><dd id="tkVehicle">—</dd></div>
               <div><dt>Address</dt><dd id="tkWhere">—</dd></div>
-              <div class="bw-tk-price"><dt>Total · pay after</dt><dd>$80</dd></div>
+              <div class="bw-tk-price"><dt>Total · pay after</dt><dd id="tkPrice">$80</dd></div>
             </dl>
             <a class="btn btn-primary btn-block" id="bwIcs" download="auto-glow-detail.ics" href="#">Add to Calendar</a>
             <ol class="bw-next-steps">
@@ -443,7 +462,7 @@
 
   </div><!-- /#page -->
 
-  <script src="script.js?v=16"></script>
+  <script src="script.js?v=17"></script>
   <script type="module" src="account.js?v=14"></script>
 </body>
 </html>
