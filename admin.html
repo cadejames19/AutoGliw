@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=10" />
+  <link rel="stylesheet" href="styles.css?v=11" />
 </head>
 <body class="adm-body">
   <header class="navbar scrolled">
@@ -29,14 +29,8 @@
       <div class="ag-box">
         <h2>Owner sign-in</h2>
         <p class="ag-sub">Enter your Auto Glow admin email.</p>
-        <div id="gateStepEmail">
-          <input class="bw-input" type="email" id="gateEmail" placeholder="you@autoglow.com" autocomplete="email" />
-          <button class="btn btn-primary btn-block" id="gateSend">Email me a code</button>
-        </div>
-        <div id="gateStepCode" hidden>
-          <input class="bw-input" type="text" id="gateCode" inputmode="numeric" placeholder="6-digit code" />
-          <button class="btn btn-primary btn-block" id="gateVerify">Verify</button>
-        </div>
+        <input class="bw-input" type="email" id="gateEmail" placeholder="you@autoglow.com" autocomplete="email" />
+        <button class="btn btn-primary btn-block" id="gateSend">Email me a sign-in link</button>
         <p class="ag-msg" id="gateMsg"></p>
       </div>
     </section>
@@ -75,6 +69,6 @@
     </section>
   </main>
 
-  <script type="module" src="admin.js?v=10"></script>
+  <script type="module" src="admin.js?v=11"></script>
 </body>
 </html>

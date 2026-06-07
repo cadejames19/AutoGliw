@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/admins/$(request.auth.token.email));
+    }
+
+    // Bookings: guests may create; customers read only their own; admins manage all.
+    match /bookings/{id} {
+      allow create: if true;
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid ||
+        resource.data.email == request.auth.token.email ||
+        isAdmin()
+      );
+      allow update, delete: if isAdmin();
+    }
+
+    // Admins: a signed-in user may read only their own admin row (to check membership).
+    match /admins/{email} {
+      allow read: if request.auth != null && request.auth.token.email == email;
+    }
+  }
+}

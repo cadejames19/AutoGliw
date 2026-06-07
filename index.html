@@ -14,7 +14,7 @@
   <meta property="og:title" content="Auto Glow — Premium Car Detailing" />
   <meta property="og:description" content="Showroom shine, every time. Book your Express Detail in seconds." />
   <meta property="og:image" content="assets/logo.png" />
-  <link rel="stylesheet" href="styles.css?v=10" />
+  <link rel="stylesheet" href="styles.css?v=11" />
 </head>
 <body>
   <!-- Animated background -->
@@ -407,15 +407,9 @@
     <div class="ag-box" role="dialog" aria-modal="true" aria-labelledby="agAuthTitle">
       <button class="ag-x" data-ag-close aria-label="Close">×</button>
       <h3 id="agAuthTitle">Sign in to Auto Glow</h3>
-      <p class="ag-sub">No passwords — we email you a code.</p>
-      <div id="agStepEmail">
-        <input class="bw-input" type="email" id="agEmail" placeholder="jane@email.com" autocomplete="email" />
-        <button class="btn btn-primary btn-block" id="agSend">Email me a code</button>
-      </div>
-      <div id="agStepCode" hidden>
-        <input class="bw-input" type="text" id="agCode" inputmode="numeric" placeholder="6-digit code" />
-        <button class="btn btn-primary btn-block" id="agVerify">Verify &amp; sign in</button>
-      </div>
+      <p class="ag-sub">No passwords — we email you a secure sign-in link.</p>
+      <input class="bw-input" type="email" id="agEmail" placeholder="jane@email.com" autocomplete="email" />
+      <button class="btn btn-primary btn-block" id="agSend">Email me a sign-in link</button>
       <p class="ag-msg" id="agAuthMsg"></p>
     </div>
   </div>
@@ -434,7 +428,7 @@
     </div>
   </div>
 
-  <script src="script.js?v=10"></script>
-  <script type="module" src="account.js?v=10"></script>
+  <script src="script.js?v=11"></script>
+  <script type="module" src="account.js?v=11"></script>
 </body>
 </html>
