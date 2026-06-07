@@ -14,9 +14,22 @@
   <meta property="og:title" content="Auto Glow — Premium Car Detailing" />
   <meta property="og:description" content="Showroom shine, every time. Book your Express Detail in seconds." />
   <meta property="og:image" content="assets/logo.png" />
-  <link rel="stylesheet" href="styles.css?v=13" />
+  <link rel="stylesheet" href="styles.css?v=14" />
 </head>
 <body>
+  <!-- Mobile drawer (slides in from the right; page pushes left) -->
+  <div class="nav-scrim" id="navScrim" hidden></div>
+  <aside class="nav-drawer" id="navDrawer" aria-label="Menu" aria-hidden="true">
+    <nav class="drawer-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#book">Book</a>
+      <button type="button" class="nav-account" id="drawerAccount">Sign In</button>
+      <a href="#book" class="btn btn-primary btn-block drawer-cta">Book Now</a>
+    </nav>
+  </aside>
+
+  <div id="page">
   <!-- Animated background -->
   <div class="bg-orbs" aria-hidden="true">
     <span class="orb orb-1"></span>
@@ -428,7 +441,9 @@
     </div>
   </div>
 
-  <script src="script.js?v=11"></script>
-  <script type="module" src="account.js?v=12"></script>
+  </div><!-- /#page -->
+
+  <script src="script.js?v=14"></script>
+  <script type="module" src="account.js?v=14"></script>
 </body>
 </html>

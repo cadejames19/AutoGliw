@@ -10,20 +10,33 @@ document.addEventListener("DOMContentLoaded", () => {
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Mobile menu
+  // Mobile drawer (slides in from the right; the page pushes left)
   const navToggle = document.getElementById("navToggle");
-  navToggle.addEventListener("click", () => {
-    const open = navbar.classList.toggle("menu-open");
+  const drawer = document.getElementById("navDrawer");
+  const scrim = document.getElementById("navScrim");
+  const drawerAccount = document.getElementById("drawerAccount");
+  const navAccount = document.getElementById("navAccount");
+
+  const setDrawer = (open) => {
+    document.body.classList.toggle("drawer-open", open);
     navToggle.classList.toggle("active", open);
     navToggle.setAttribute("aria-expanded", String(open));
-  });
-  navbar.querySelectorAll(".nav-links a, .nav-cta").forEach((link) =>
-    link.addEventListener("click", () => {
-      navbar.classList.remove("menu-open");
-      navToggle.classList.remove("active");
-      navToggle.setAttribute("aria-expanded", "false");
-    })
+    drawer.setAttribute("aria-hidden", String(!open));
+    if (scrim) scrim.hidden = !open;
+    if (open && drawerAccount && navAccount) drawerAccount.textContent = navAccount.textContent;
+  };
+  navToggle.addEventListener("click", () =>
+    setDrawer(!document.body.classList.contains("drawer-open"))
   );
+  scrim?.addEventListener("click", () => setDrawer(false));
+  drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setDrawer(false)));
+  drawerAccount?.addEventListener("click", () => {
+    setDrawer(false);
+    navAccount?.click();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && document.body.classList.contains("drawer-open")) setDrawer(false);
+  });
 
   // Scroll reveal
   const reveals = document.querySelectorAll(".reveal");

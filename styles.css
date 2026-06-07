@@ -640,14 +640,54 @@ img, svg { display: block; }
   .why-grid { grid-template-columns: 1fr 1fr; }
   .nav-links, .nav-cta { display: none; }
   .nav-toggle { display: flex; }
-  .navbar.menu-open { background: rgba(8, 12, 28, 0.95); backdrop-filter: blur(14px); flex-wrap: wrap; }
-  .navbar.menu-open .nav-links {
-    display: flex; flex-direction: column; width: 100%; gap: 16px; margin-top: 18px; text-align: center;
-  }
-  .navbar.menu-open .nav-cta { display: inline-flex; margin: 10px auto 4px; }
   .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.active span:nth-child(2) { opacity: 0; }
   .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ----- Airy hero rhythm ----- */
+  .hero { padding: 110px 22px 56px; }
+  .hero-inner { gap: 0; row-gap: 0; }
+  .eyebrow { margin-bottom: 6px; }
+  .hero h1 { margin: 8px 0 0; }
+  .hero-sub { margin: 18px auto 0; max-width: 30rem; }
+  .hero-visual { margin: 30px 0 8px; }
+  .hero-actions { margin: 18px 0 0; gap: 12px; }
+  .hero-stats { margin: 30px 0 0; gap: 30px; justify-content: center; }
+
+  /* ----- Section breathing room ----- */
+  .section { padding: 72px 22px; }
+  .section-head { margin-bottom: 40px; }
+  .service-grid { gap: 18px; }
+  .service-side { display: grid; gap: 14px; }
+}
+
+/* ===== Right-side push drawer (mobile) ===== */
+.nav-drawer {
+  position: fixed; top: 0; right: 0; height: 100dvh; width: min(82vw, 300px);
+  z-index: 70; display: flex; flex-direction: column; justify-content: center;
+  padding: 30px 26px calc(30px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(16, 22, 44, 0.98), rgba(9, 12, 26, 0.98));
+  border-left: 1px solid var(--line); box-shadow: -20px 0 50px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%); transition: transform 0.38s var(--ease); visibility: hidden;
+}
+.drawer-links { display: flex; flex-direction: column; gap: 8px; }
+.drawer-links a:not(.btn), .nav-drawer .nav-account {
+  font-family: "Poppins", sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--text);
+  padding: 14px 4px; border-bottom: 1px solid var(--line); text-align: left; background: none; border-radius: 0;
+}
+.nav-drawer .nav-account { border: none; border-bottom: 1px solid var(--line); width: 100%; }
+.drawer-cta { margin-top: 22px; }
+.nav-scrim {
+  position: fixed; inset: 0; z-index: 65; background: rgba(2, 5, 14, 0.55);
+  opacity: 0; pointer-events: none; transition: opacity 0.38s var(--ease);
+}
+#page { transition: transform 0.38s var(--ease); }
+body.drawer-open #page { transform: translateX(calc(min(82vw, 300px) * -1)); }
+body.drawer-open .nav-drawer { transform: translateX(0); visibility: visible; }
+body.drawer-open .nav-scrim { opacity: 1; pointer-events: auto; }
+@media (min-width: 901px) {
+  .nav-drawer, .nav-scrim { display: none; }
+  body.drawer-open #page { transform: none; }
 }
 @media (max-width: 560px) {
   .field-row { grid-template-columns: 1fr; }
@@ -660,19 +700,26 @@ img, svg { display: block; }
   .field-row { grid-template-columns: 1fr; }
   .phone-scene { width: min(88vw, 360px); height: min(112vw, 460px); }
   .phone { width: min(56vw, 215px); }
-  .hero-stats { gap: 22px; }
-  .hero { padding: 104px 18px 48px; }
+  .hero { padding: 104px 20px 52px; }
   .hero h1 { font-size: clamp(2.1rem, 9vw, 3rem); }
-  .hero-actions .btn { flex: 1 1 auto; }
+  .hero-sub { font-size: 1rem; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn { width: 100%; }
+  .hero-stats { gap: 26px; }
   .hero-stats strong { font-size: 1.45rem; }
-  .section { padding: 64px 18px; }
-  .section-head { margin-bottom: 40px; }
+  .section { padding: 64px 20px; }
+  .section-head { margin-bottom: 36px; }
   .service-card { padding: 30px 24px; }
+  /* wizard breathing room */
+  .bw-rail, .bw-flow { padding: 26px 20px; }
+  .bw-flow { padding-top: 22px; }
+  .bw-step .bw-q { margin-bottom: 22px; }
+  .bw-nav { margin-top: 30px; }
+  .bw-nav .btn { flex: 1; }
   /* 16px inputs stop iOS Safari from auto-zooming on focus */
-  .field input, .field select, .field textarea { font-size: 16px; }
-  /* Larger, thumb-friendly tap targets */
+  .field input, .field select, .field textarea, .bw-input { font-size: 16px; }
+  /* thumb-friendly tap targets */
   .btn { padding: 13px 22px; }
-  .nav-links a { padding: 6px 0; font-size: 1.05rem; }
 }
 
 /* ===== Sticky mobile booking bar ===== */

@@ -31,4 +31,4 @@ Core files, each with a single responsibility:
 - Scroll-reveal animation on a new element: add the `reveal` class; `script.js` handles the rest (with a non-IntersectionObserver fallback).
 - The booking wizard (`bw-*` classes) keeps all state in one `state` object in `script.js` — backend-ready JSON; submission is a function swap from show-ticket to POST. Steps gate on `validateStep(n)`; errors write into `[data-err]` slots. Chips are buttons with `aria-pressed`.
 - No backend yet: submission renders the confirmation ticket (with client-generated .ics calendar file). User text rendered via `textContent` only — keep it that way.
-- The site is fully responsive with mobile-specific UI (hamburger nav, sticky CTA) — check both breakpoints when changing layout.
+- The site is fully responsive. Mobile nav is a right-side push drawer (`#navDrawer` + `#navScrim`): the hamburger toggles `body.drawer-open`, which slides `#page` (the wrapper around all content) left and reveals the drawer. The drawer's account button proxies clicks to the real `#navAccount`. Keep new top-level content inside `#page`.
