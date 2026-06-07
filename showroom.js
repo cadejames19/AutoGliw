@@ -3,7 +3,6 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
-import { Reflector } from "three/addons/objects/Reflector.js";
 
 const canvas = document.getElementById("stage");
 const loaderEl = document.getElementById("stageLoader");
@@ -38,7 +37,7 @@ if (canvas && window.WebGLRenderingContext) {
 
   async function init() {
     // ---------- Renderer ----------
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -47,8 +46,7 @@ if (canvas && window.WebGLRenderingContext) {
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x05070d);
-    scene.fog = new THREE.Fog(0x05070d, 14, 30);
+    renderer.setClearColor(0x000000, 0);
 
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 80);
     camera.position.set(8.5, 2.8, 9.5);
@@ -90,63 +88,32 @@ if (canvas && window.WebGLRenderingContext) {
     fill.position.set(-5, 3, 6);
     scene.add(fill);
 
-    // ---------- Floor: polished graphite with real blurred reflection ----------
-    const floorR = 16;
-    const mirror = new Reflector(new THREE.CircleGeometry(floorR, 64), {
-      textureWidth: 700, // low res = natural blur
-      textureHeight: 700,
-      color: 0x556077,
-      clipBias: 0.003,
-    });
-    mirror.rotation.x = -Math.PI / 2;
-    mirror.position.y = -0.002;
-    scene.add(mirror);
-
-    // graphite glaze over the mirror (controls reflection strength + adds roughness feel)
-    const glaze = new THREE.Mesh(
-      new THREE.CircleGeometry(floorR, 64),
-      new THREE.MeshStandardMaterial({
-        color: 0x0a0e18,
-        roughness: 0.32,
-        metalness: 0.1,
-        transparent: true,
-        opacity: 0.78,
-        depthWrite: false,
-      })
-    );
-    glaze.rotation.x = -Math.PI / 2;
-    glaze.position.y = 0.0005;
-    glaze.receiveShadow = true;
-    scene.add(glaze);
-
-    // shadow catcher
-    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.42 });
-    const shadowPlane = new THREE.Mesh(new THREE.CircleGeometry(floorR, 32), shadowMat);
+    // ---------- Grounding: soft shadow + ambient blob only (no showroom floor) ----------
+    const shadowMat = new THREE.ShadowMaterial({ opacity: 0.38 });
+    const shadowPlane = new THREE.Mesh(new THREE.CircleGeometry(9, 32), shadowMat);
     shadowPlane.rotation.x = -Math.PI / 2;
     shadowPlane.position.y = 0.001;
     shadowPlane.receiveShadow = true;
     scene.add(shadowPlane);
 
-    // edge vignette so the floor melts into the dark
-    const fadeTex = (() => {
+    const blobTex = (() => {
       const c = document.createElement("canvas");
-      c.width = c.height = 512;
+      c.width = c.height = 256;
       const ctx = c.getContext("2d");
-      const g = ctx.createRadialGradient(256, 256, 130, 256, 256, 256);
-      g.addColorStop(0, "rgba(5,7,13,0)");
-      g.addColorStop(0.75, "rgba(5,7,13,0.55)");
-      g.addColorStop(1, "rgba(5,7,13,1)");
+      const g = ctx.createRadialGradient(128, 128, 8, 128, 128, 128);
+      g.addColorStop(0, "rgba(1,3,12,0.5)");
+      g.addColorStop(1, "rgba(1,3,12,0)");
       ctx.fillStyle = g;
-      ctx.fillRect(0, 0, 512, 512);
+      ctx.fillRect(0, 0, 256, 256);
       return new THREE.CanvasTexture(c);
     })();
-    const fade = new THREE.Mesh(
-      new THREE.CircleGeometry(floorR, 64),
-      new THREE.MeshBasicMaterial({ map: fadeTex, transparent: true, depthWrite: false })
+    const blob = new THREE.Mesh(
+      new THREE.PlaneGeometry(7.2, 3.4),
+      new THREE.MeshBasicMaterial({ map: blobTex, transparent: true, depthWrite: false })
     );
-    fade.rotation.x = -Math.PI / 2;
-    fade.position.y = 0.002;
-    scene.add(fade);
+    blob.rotation.x = -Math.PI / 2;
+    blob.position.y = 0.0005;
+    scene.add(blob);
 
     // ---------- Load the car ----------
     const gltf = await new Promise((resolve, reject) => {
@@ -154,7 +121,7 @@ if (canvas && window.WebGLRenderingContext) {
         "models/aventador/aventador.gltf",
         resolve,
         (e) => {
-          if (progressEl && e.total) progressEl.textContent = `Loading the Aventador… ${Math.round((e.loaded / e.total) * 100)}%`;
+          if (progressEl && e.total) progressEl.textContent = `Loading the car… ${Math.round((e.loaded / e.total) * 100)}%`;
           else if (progressEl) progressEl.textContent = `Loading the Aventador… ${(e.loaded / 1048576).toFixed(1)} MB`;
         },
         reject
@@ -393,8 +360,8 @@ if (canvas && window.WebGLRenderingContext) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.target.set(0, 0.55, 0);
-    controls.minDistance = 3.6;
-    controls.maxDistance = 11;
+    controls.minDistance = 3.2;
+    controls.maxDistance = 8.5;
     controls.minPolarAngle = 0.55;
     controls.maxPolarAngle = 1.52; // never under the floor
     controls.enablePan = false;

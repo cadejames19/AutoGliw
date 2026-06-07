@@ -104,7 +104,7 @@ img, svg { display: block; }
 .hero { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; padding: 120px clamp(20px, 5vw, 60px) 60px; }
 .hero-inner {
   max-width: 1200px; margin: 0 auto; width: 100%;
-  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center;
+  display: grid; grid-template-columns: 1fr 1.05fr; gap: 40px; align-items: center;
 }
 .eyebrow {
   display: inline-block; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
@@ -469,20 +469,14 @@ img, svg { display: block; }
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
 
-/* ===== Showroom (3D stage) ===== */
-.showroom { position: relative; z-index: 1; padding: clamp(70px, 9vw, 110px) 0 0; }
-.showroom .section-head { padding: 0 clamp(20px, 5vw, 60px); }
-.stage-wrap {
-  position: relative; width: 100%; height: clamp(420px, 58vw, 720px);
-  background: radial-gradient(120% 90% at 50% 0%, #10182f 0%, #070b16 55%, #04060c 100%);
-  overflow: hidden;
-}
-#stage { width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+/* ===== Hero 3D stage ===== */
+.model-stage { position: relative; width: 100%; height: clamp(380px, 42vw, 560px); }
+#stage { position: relative; z-index: 1; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
 #stage:active { cursor: grabbing; }
 .stage-loader {
   position: absolute; inset: 0; display: flex; flex-direction: column; gap: 14px;
-  align-items: center; justify-content: center; color: var(--muted); font-size: 0.95rem;
-  background: inherit; transition: opacity 0.6s; z-index: 2;
+  align-items: center; justify-content: center; color: var(--muted); font-size: 0.9rem;
+  transition: opacity 0.6s; z-index: 2;
 }
 .stage-loader.done { opacity: 0; pointer-events: none; }
 .stage-spinner {
@@ -492,7 +486,7 @@ img, svg { display: block; }
 }
 @keyframes stageSpin { to { transform: rotate(360deg); } }
 .stage-controls {
-  position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 3;
+  position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); z-index: 3;
   display: flex; gap: 6px; padding: 8px 10px; border-radius: 999px;
   background: rgba(8, 12, 26, 0.7); backdrop-filter: blur(12px); border: 1px solid var(--line);
 }
