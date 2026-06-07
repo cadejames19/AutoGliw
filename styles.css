@@ -470,7 +470,7 @@ img, svg { display: block; }
 .reveal.visible { opacity: 1; transform: none; }
 
 /* ===== Hero 3D stage ===== */
-.model-stage { position: relative; width: 100%; height: clamp(380px, 42vw, 560px); }
+.model-stage { position: relative; width: 100%; height: clamp(430px, 50vw, 660px); }
 #stage { position: relative; z-index: 1; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
 #stage:active { cursor: grabbing; }
 .stage-loader {

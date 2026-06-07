@@ -49,7 +49,7 @@ if (canvas && window.WebGLRenderingContext) {
     renderer.setClearColor(0x000000, 0);
 
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 80);
-    camera.position.set(8.5, 2.8, 9.5);
+    camera.position.set(7, 2.4, 7.8);
 
     const resize = () => {
       const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -360,8 +360,8 @@ if (canvas && window.WebGLRenderingContext) {
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.target.set(0, 0.55, 0);
-    controls.minDistance = 3.2;
-    controls.maxDistance = 8.5;
+    controls.minDistance = 2.7;
+    controls.maxDistance = 7;
     controls.minPolarAngle = 0.55;
     controls.maxPolarAngle = 1.52; // never under the floor
     controls.enablePan = false;
@@ -369,10 +369,10 @@ if (canvas && window.WebGLRenderingContext) {
     controls.autoRotateSpeed = -0.55;
 
     const presets = [
-      { pos: [4.6, 1.35, 4.9], tgt: [0, 0.5, 0] },   // hero 3/4 front
-      { pos: [-5.2, 1.1, -4.4], tgt: [0, 0.55, 0] }, // rear wing
-      { pos: [0.2, 0.85, 6.4], tgt: [0, 0.5, 0] },   // low side
-      { pos: [3.4, 3.6, -5.0], tgt: [0, 0.4, 0] },   // high rear 3/4
+      { pos: [3.7, 1.1, 3.95], tgt: [0, 0.5, 0] },   // hero 3/4 front
+      { pos: [-4.2, 0.95, -3.6], tgt: [0, 0.55, 0] }, // rear 3/4
+      { pos: [0.15, 0.7, 5.2], tgt: [0, 0.5, 0] },   // low side
+      { pos: [2.8, 2.9, -4.1], tgt: [0, 0.4, 0] },   // high rear 3/4
     ];
     let presetIdx = 0;
     const flyTo = (p, dur = 1900) => {
