@@ -127,7 +127,7 @@ img, svg { display: block; }
 
 /* Hero visual */
 .hero-visual { display: grid; place-items: center; }
-.car-stage { position: relative; width: 360px; height: 360px; display: grid; place-items: center; }
+.car-stage { position: relative; width: clamp(300px, 40vw, 460px); height: clamp(300px, 40vw, 460px); display: grid; place-items: center; }
 .glow-ring {
   position: absolute; inset: 0; border-radius: 50%;
   background: radial-gradient(circle at center, rgba(47, 107, 255, 0.35), transparent 65%);
@@ -139,7 +139,7 @@ img, svg { display: block; }
 }
 @keyframes pulse { 50% { transform: scale(1.08); opacity: 0.85; } }
 @keyframes spin { to { transform: rotate(360deg); } }
-.car-emoji { font-size: 9rem; filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5)); animation: bob 3.5s ease-in-out infinite; }
+.car-illustration { width: 100%; height: auto; filter: drop-shadow(0 22px 26px rgba(2, 6, 30, 0.55)); animation: bob 3.5s ease-in-out infinite; }
 @keyframes bob { 50% { transform: translateY(-16px); } }
 .sparkle { position: absolute; color: #cfe0ff; font-size: 1.4rem; animation: twinkle 2.4s ease-in-out infinite; }
 .s1 { top: 14%; left: 18%; animation-delay: 0s; }
@@ -307,8 +307,7 @@ img, svg { display: block; }
   .field-row { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; }
   .book-info, .book-form { padding: 30px 22px; }
-  .car-stage { width: min(78vw, 300px); height: min(78vw, 300px); }
-  .car-emoji { font-size: clamp(5.5rem, 28vw, 7rem); }
+  .car-stage { width: min(86vw, 340px); height: min(86vw, 340px); }
   .hero-stats { gap: 22px; }
   .hero { padding: 104px 18px 48px; }
   .hero h1 { font-size: clamp(2.1rem, 9vw, 3rem); }

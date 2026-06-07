@@ -62,7 +62,67 @@
       <div class="hero-visual reveal">
         <div class="car-stage">
           <div class="glow-ring"></div>
-          <div class="car-emoji" aria-hidden="true">🚗</div>
+          <svg class="car-illustration" viewBox="0 0 560 280" role="img" aria-label="Royal blue cartoon sports car">
+            <defs>
+              <linearGradient id="bodyGrad" x1="0" y1="0" x2="0.35" y2="1">
+                <stop offset="0" stop-color="#5b8cff" />
+                <stop offset="0.5" stop-color="#2f6bff" />
+                <stop offset="1" stop-color="#14307f" />
+              </linearGradient>
+              <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#2a3f78" />
+                <stop offset="1" stop-color="#0c1430" />
+              </linearGradient>
+              <linearGradient id="rimGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#eaf1ff" />
+                <stop offset="1" stop-color="#7ea4ff" />
+              </linearGradient>
+              <radialGradient id="headGrad" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0" stop-color="#ffffff" />
+                <stop offset="1" stop-color="#bfe0ff" />
+              </radialGradient>
+              <radialGradient id="carShadow" cx="0.5" cy="0.5" r="0.5">
+                <stop offset="0" stop-color="#02061e" stop-opacity="0.5" />
+                <stop offset="1" stop-color="#02061e" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+
+            <ellipse cx="288" cy="236" rx="220" ry="20" fill="url(#carShadow)" />
+
+            <!-- body -->
+            <path d="M52 168 C46 150 58 142 80 140 C96 118 120 112 150 110 C175 96 205 86 250 84 L320 84 C360 84 386 96 404 120 C430 128 460 132 478 138 C502 144 514 150 514 166 C514 178 506 182 494 182 L88 182 C68 182 56 180 52 168 Z" fill="url(#bodyGrad)" stroke="#0c1f57" stroke-width="2" />
+
+            <!-- gloss highlight -->
+            <path d="M120 120 C180 96 260 90 330 92 C372 94 398 104 416 122 L404 127 C386 109 360 100 326 99 C258 97 184 103 132 125 Z" fill="#ffffff" opacity="0.14" />
+
+            <!-- glass -->
+            <path d="M176 116 C196 95 222 88 252 87 L316 87 C344 89 362 100 376 116 Z" fill="url(#glassGrad)" />
+            <path d="M262 87 L262 116" stroke="#0c1f57" stroke-width="6" stroke-linecap="round" />
+            <path d="M196 112 L226 92 L246 92 L210 116 Z" fill="#ffffff" opacity="0.18" />
+            <path d="M300 112 L330 92 L344 96 L318 116 Z" fill="#ffffff" opacity="0.12" />
+
+            <!-- beltline, door, handle -->
+            <path d="M150 122 L470 138" stroke="#0c1f57" stroke-width="2" opacity="0.5" fill="none" />
+            <path d="M276 120 L276 180" stroke="#0c1f57" stroke-width="2" opacity="0.45" />
+            <rect x="296" y="130" width="22" height="7" rx="3.5" fill="#0c1f57" opacity="0.6" />
+
+            <!-- lights -->
+            <path d="M498 148 C508 148 512 154 512 160 L498 162 Z" fill="url(#headGrad)" />
+            <circle cx="505" cy="155" r="11" fill="#cfe7ff" opacity="0.45" />
+            <path d="M60 150 L78 150 L78 160 L58 160 Z" fill="#ff5b6e" />
+
+            <!-- wheels -->
+            <circle cx="160" cy="180" r="41" fill="#070b16" />
+            <circle cx="410" cy="180" r="41" fill="#070b16" />
+            <circle cx="160" cy="180" r="36" fill="#0c111f" />
+            <circle cx="410" cy="180" r="36" fill="#0c111f" />
+            <circle cx="160" cy="180" r="21" fill="url(#rimGrad)" />
+            <circle cx="410" cy="180" r="21" fill="url(#rimGrad)" />
+            <circle cx="160" cy="180" r="14" fill="none" stroke="#2f6bff" stroke-width="3" />
+            <circle cx="410" cy="180" r="14" fill="none" stroke="#2f6bff" stroke-width="3" />
+            <circle cx="160" cy="180" r="6" fill="#14307f" />
+            <circle cx="410" cy="180" r="6" fill="#14307f" />
+          </svg>
           <span class="sparkle s1">✦</span>
           <span class="sparkle s2">✧</span>
           <span class="sparkle s3">✦</span>
