@@ -222,92 +222,153 @@
 
   <!-- Booking -->
   <section class="book section" id="book">
-    <div class="book-card reveal">
-      <div class="book-info">
+    <div class="bw-card reveal" id="bookingCard">
+      <!-- Summary rail -->
+      <aside class="bw-rail">
         <span class="eyebrow">Book Your Detail</span>
         <h2>Let's make it <span class="shine">shine</span>.</h2>
-        <p>Fill in your details and we'll confirm your Express Detail appointment.</p>
-        <ul class="book-points">
-          <li>✓ Express Detail — <strong>$80</strong></li>
-          <li>✓ Flexible scheduling, 7 days a week</li>
-          <li>✓ No payment required to book</li>
-        </ul>
-      </div>
+        <p class="bw-proof"><strong>4.9★</strong> rated · <strong>2,000+</strong> cars detailed</p>
+        <dl class="bw-summary" aria-live="polite">
+          <div class="bw-sum-row"><dt>Service</dt><dd id="sumService">Express Detail</dd></div>
+          <div class="bw-sum-row"><dt>Vehicle</dt><dd id="sumVehicle">—</dd></div>
+          <div class="bw-sum-row"><dt>When</dt><dd id="sumWhen">—</dd></div>
+          <div class="bw-sum-row"><dt>Address</dt><dd id="sumWhere">—</dd></div>
+          <div class="bw-sum-row bw-sum-price"><dt>Total</dt><dd id="sumPrice">$80</dd></div>
+        </dl>
+        <div class="bw-badge">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z" /><path d="M8.5 12l2.5 2.5L16 9.5" /></svg>
+          <div><strong>The Auto Glow promise</strong><span>Not glowing? We make it right.</span></div>
+        </div>
+      </aside>
 
-      <form class="book-form" id="bookForm" novalidate>
-        <div class="field">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" placeholder="Jane Doe" required />
-          <small class="error" data-for="name"></small>
+      <!-- Wizard -->
+      <div class="bw-flow">
+        <div class="bw-progress">
+          <div class="bw-track" aria-hidden="true"><span class="bw-fill" id="bwFill"></span></div>
+          <ol class="bw-labels" id="bwLabels">
+            <li class="active" data-step="1">Your car</li>
+            <li data-step="2">Date &amp; time</li>
+            <li data-step="3">Details</li>
+          </ol>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="jane@email.com" required />
-            <small class="error" data-for="email"></small>
+
+        <form id="bwForm" novalidate>
+          <!-- Step 1 -->
+          <fieldset class="bw-step active" data-step="1">
+            <legend class="bw-q" tabindex="-1">Tell us about your car.</legend>
+            <div class="bw-tiers" role="group" aria-label="Service">
+              <button type="button" class="bw-tier selected" aria-pressed="true">
+                <b>Express Detail</b><span>Inside &amp; out · ~60 min</span><em>$80</em>
+              </button>
+              <button type="button" class="bw-tier soon" disabled><b>Full Detail</b><span>Coming soon</span></button>
+              <button type="button" class="bw-tier soon" disabled><b>Ceramic Coat</b><span>Coming soon</span></button>
+            </div>
+            <p class="bw-label" id="lblSize">Vehicle size</p>
+            <div class="bw-chips" id="bwSize" role="group" aria-labelledby="lblSize">
+              <button type="button" class="bw-chip" data-val="Coupe / Sedan" aria-pressed="false">Coupe / Sedan</button>
+              <button type="button" class="bw-chip" data-val="SUV / Crossover" aria-pressed="false">SUV / Crossover</button>
+              <button type="button" class="bw-chip" data-val="Truck" aria-pressed="false">Truck</button>
+              <button type="button" class="bw-chip" data-val="Van / Minivan" aria-pressed="false">Van / Minivan</button>
+            </div>
+            <small class="bw-err" data-err="size"></small>
+            <label class="bw-label" for="bwCar">Make &amp; model</label>
+            <input class="bw-input" type="text" id="bwCar" name="car" placeholder="e.g., Toyota Camry" autocomplete="off" />
+            <small class="bw-err" data-err="car"></small>
+            <p class="bw-label" id="lblCond">Condition <span class="bw-opt">(optional)</span></p>
+            <div class="bw-chips" id="bwCond" role="group" aria-labelledby="lblCond">
+              <button type="button" class="bw-chip" data-val="Lightly lived-in" aria-pressed="false">Lightly lived-in</button>
+              <button type="button" class="bw-chip" data-val="Average" aria-pressed="false">Average</button>
+              <button type="button" class="bw-chip" data-val="Needs some love" aria-pressed="false">Needs some love</button>
+            </div>
+            <div class="bw-nav">
+              <span></span>
+              <button type="button" class="btn btn-primary bw-next">Continue</button>
+            </div>
+          </fieldset>
+
+          <!-- Step 2 -->
+          <fieldset class="bw-step" data-step="2">
+            <legend class="bw-q" tabindex="-1">When works for you?</legend>
+            <p class="bw-label" id="lblDate">Pick a day</p>
+            <div class="bw-dates" id="bwDates" role="group" aria-labelledby="lblDate"></div>
+            <small class="bw-err" data-err="date"></small>
+            <p class="bw-label" id="lblTime">Pick a time</p>
+            <div class="bw-chips bw-times" id="bwTimes" role="group" aria-labelledby="lblTime"></div>
+            <small class="bw-err" data-err="time"></small>
+            <div class="bw-nav">
+              <button type="button" class="btn btn-ghost bw-back">Back</button>
+              <button type="button" class="btn btn-primary bw-next">Continue</button>
+            </div>
+          </fieldset>
+
+          <!-- Step 3 -->
+          <fieldset class="bw-step" data-step="3">
+            <legend class="bw-q" tabindex="-1">Where do we find you?</legend>
+            <div class="field">
+              <label for="bwName">Full name</label>
+              <input type="text" id="bwName" name="name" placeholder="Jane Doe" autocomplete="name" />
+              <small class="bw-err" data-err="name"></small>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="bwPhone">Phone</label>
+                <input type="tel" id="bwPhone" name="phone" placeholder="(555) 123-4567" autocomplete="tel" />
+                <small class="bw-err" data-err="phone"></small>
+              </div>
+              <div class="field">
+                <p class="bw-label bw-pref-label" id="lblPref">Reach you by</p>
+                <div class="bw-chips bw-pref" id="bwPref" role="group" aria-labelledby="lblPref">
+                  <button type="button" class="bw-chip selected" data-val="Text" aria-pressed="true">Text</button>
+                  <button type="button" class="bw-chip" data-val="Call" aria-pressed="false">Call</button>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label for="bwAddress">Service address</label>
+              <input type="text" id="bwAddress" name="address" placeholder="123 Main St, City" autocomplete="street-address" />
+              <small class="bw-err" data-err="address"></small>
+            </div>
+            <details class="bw-notes">
+              <summary>Anything we should know? <span class="bw-opt">(optional)</span></summary>
+              <textarea id="bwNotes" rows="2" placeholder="Gate code, pet hair, that mystery smell…"></textarea>
+            </details>
+            <div class="bw-nav">
+              <button type="button" class="btn btn-ghost bw-back">Back</button>
+              <button type="submit" class="btn btn-primary btn-lg" id="bwConfirm">Confirm Booking</button>
+            </div>
+            <p class="bw-assure">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+              No payment until the job's done · Free to cancel anytime
+            </p>
+          </fieldset>
+        </form>
+
+        <!-- Ticket -->
+        <div class="bw-ticket" id="bwTicket" hidden>
+          <div class="bw-ticket-card">
+            <div class="bw-check" aria-hidden="true">
+              <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" /><path d="M14 27l8 8 16-16" /></svg>
+            </div>
+            <h3 id="tkTitle">You're booked!</h3>
+            <p class="bw-tk-sub">We'll text you shortly to confirm.</p>
+            <div class="bw-tear" aria-hidden="true"></div>
+            <dl class="bw-tk-rows">
+              <div><dt>When</dt><dd id="tkWhen">—</dd></div>
+              <div><dt>Vehicle</dt><dd id="tkVehicle">—</dd></div>
+              <div><dt>Address</dt><dd id="tkWhere">—</dd></div>
+              <div class="bw-tk-price"><dt>Total · pay after</dt><dd>$80</dd></div>
+            </dl>
+            <a class="btn btn-primary btn-block" id="bwIcs" download="auto-glow-detail.ics" href="#">Add to Calendar</a>
+            <ol class="bw-next-steps">
+              <li class="done">Booked</li>
+              <li>We text to confirm</li>
+              <li>We arrive &amp; make it glow</li>
+            </ol>
           </div>
-          <div class="field">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required />
-            <small class="error" data-for="phone"></small>
-          </div>
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="carMake">Car Make</label>
-            <input type="text" id="carMake" name="carMake" placeholder="Toyota" required />
-            <small class="error" data-for="carMake"></small>
-          </div>
-          <div class="field">
-            <label for="carModel">Car Model</label>
-            <input type="text" id="carModel" name="carModel" placeholder="Camry" required />
-            <small class="error" data-for="carModel"></small>
-          </div>
-        </div>
-        <div class="field">
-          <label for="service">Service</label>
-          <select id="service" name="service">
-            <option value="Express Detail — $80">Express Detail — $80</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="date">Preferred Date</label>
-            <input type="date" id="date" name="date" required />
-            <small class="error" data-for="date"></small>
-          </div>
-          <div class="field">
-            <label for="time">Preferred Time</label>
-            <input type="time" id="time" name="time" required />
-            <small class="error" data-for="time"></small>
-          </div>
-        </div>
-        <div class="field">
-          <label for="address">Service Address</label>
-          <input type="text" id="address" name="address" placeholder="123 Main St, City" required />
-          <small class="error" data-for="address"></small>
-        </div>
-        <div class="field">
-          <label for="notes">Notes <span class="optional">(optional)</span></label>
-          <textarea id="notes" name="notes" rows="2" placeholder="Anything we should know?"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block btn-lg">Confirm Booking</button>
-        <p class="form-foot">We'll reach out to confirm your appointment shortly.</p>
-      </form>
+      </div>
     </div>
   </section>
-
-  <!-- Success Modal -->
-  <div class="modal-overlay" id="modal" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-check" aria-hidden="true">
-        <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" /><path d="M14 27l8 8 16-16" /></svg>
-      </div>
-      <h3 id="modalTitle">Booking Confirmed! 🎉</h3>
-      <p id="modalBody">Thanks for choosing Auto Glow. We'll be in touch soon to confirm your detail.</p>
-      <button class="btn btn-primary" id="modalClose">Awesome</button>
-    </div>
-  </div>
 
   <!-- Sticky mobile booking bar -->
   <a href="#book" class="mobile-cta" id="mobileCta" aria-label="Book Express Detail for $80">

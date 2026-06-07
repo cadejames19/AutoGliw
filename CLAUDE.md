@@ -21,7 +21,7 @@ python3 -m http.server 8000  # then visit http://localhost:8000
 
 Core files, each with a single responsibility:
 
-- `index.html` — all page structure and content. Sections in order: navbar, hero (`#home`, with a tilting 3D phone mockup playing a mini booking loop), services (`#services`), why-us (`#why`), booking form (`#book`), confirmation modal (`#modal`), sticky mobile CTA (`#mobileCta`), footer. JS hooks into elements by `id`; styling uses classes.
+- `index.html` — all page structure and content. Sections in order: navbar, hero (`#home`, with a tilting 3D phone mockup playing a mini booking loop), services (`#services`), why-us (`#why`), booking wizard (`#book`, 3-step flow + live summary rail + ticket confirmation), confirmation modal (`#modal`), sticky mobile CTA (`#mobileCta`), footer. JS hooks into elements by `id`; styling uses classes.
 - `styles.css` — theme, layout, and all animations. Design tokens (royal blue/black palette, radii, shadows, easing) are CSS custom properties on `:root` at the top of the file; use them rather than hard-coding values. Includes a `prefers-reduced-motion` block that must keep covering any new animations.
 - `script.js` — all behavior, in one `DOMContentLoaded` handler: navbar scroll state, mobile menu, IntersectionObserver scroll reveals (`.reveal` → `.visible`), sticky mobile CTA show/hide, booking form validation, the confirmation modal.
 - `references/` — gitignored local car reference library kept from an earlier 3D experiment; not used by the site.
@@ -29,6 +29,6 @@ Core files, each with a single responsibility:
 ## Conventions
 
 - Scroll-reveal animation on a new element: add the `reveal` class; `script.js` handles the rest (with a non-IntersectionObserver fallback).
-- Form fields live in a `.field` wrapper containing an `.error` span — validation toggles `.invalid` on the wrapper and writes the message into the span. Field-specific rules go in the `validators` object in `script.js`, keyed by the input's `name`.
-- The form has no backend: submission is intercepted, validated client-side, and shown in the modal. Any user-provided text inserted into the DOM must go through `escapeHtml()` in `script.js`.
+- The booking wizard (`bw-*` classes) keeps all state in one `state` object in `script.js` — backend-ready JSON; submission is a function swap from show-ticket to POST. Steps gate on `validateStep(n)`; errors write into `[data-err]` slots. Chips are buttons with `aria-pressed`.
+- No backend yet: submission renders the confirmation ticket (with client-generated .ics calendar file). User text rendered via `textContent` only — keep it that way.
 - The site is fully responsive with mobile-specific UI (hamburger nav, sticky CTA) — check both breakpoints when changing layout.

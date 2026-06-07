@@ -72,104 +72,229 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Booking form
-  const form = document.getElementById("bookForm");
-  const modal = document.getElementById("modal");
-  const modalBody = document.getElementById("modalBody");
-  const modalClose = document.getElementById("modalClose");
+  // ===== Booking wizard =====
+  const bwForm = document.getElementById("bwForm");
+  if (bwForm) {
+    const state = {
+      service: "Express Detail", price: 80,
+      size: "", car: "", cond: "",
+      date: null, dateLabel: "", time: "",
+      name: "", phone: "", pref: "Text", address: "", notes: "",
+    };
+    const steps = [...bwForm.querySelectorAll(".bw-step")];
+    const fill = document.getElementById("bwFill");
+    const labels = [...document.querySelectorAll("#bwLabels li")];
+    let current = 1;
 
-  // Set date min to today
-  const dateInput = document.getElementById("date");
-  if (dateInput) dateInput.min = new Date().toISOString().split("T")[0];
+    // --- error helpers
+    const setErr = (key, msg) => {
+      const el = bwForm.querySelector(`[data-err="${key}"]`);
+      if (el) el.textContent = msg || "";
+    };
 
-  const showError = (field, msg) => {
-    const wrap = field.closest(".field");
-    wrap.classList.add("invalid");
-    const err = wrap.querySelector(".error");
-    if (err) err.textContent = msg;
-  };
-  const clearError = (field) => {
-    const wrap = field.closest(".field");
-    wrap.classList.remove("invalid");
-    const err = wrap.querySelector(".error");
-    if (err) err.textContent = "";
-  };
-
-  const validators = {
-    email: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || "Enter a valid email.",
-    phone: (v) => v.replace(/\D/g, "").length >= 7 || "Enter a valid phone number.",
-  };
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let valid = true;
-    let firstInvalid = null;
-
-    form.querySelectorAll("input[required], select[required]").forEach((field) => {
-      clearError(field);
-      const val = field.value.trim();
-      if (!val) {
-        showError(field, "This field is required.");
-        valid = false;
-        firstInvalid = firstInvalid || field;
-        return;
-      }
-      if (validators[field.name]) {
-        const res = validators[field.name](val);
-        if (res !== true) {
-          showError(field, res);
-          valid = false;
-          firstInvalid = firstInvalid || field;
+    // --- chip groups
+    const wireChips = (id, key, { required = false, toggle = false } = {}) => {
+      const wrap = document.getElementById(id);
+      if (!wrap) return;
+      wrap.addEventListener("click", (e) => {
+        const chip = e.target.closest(".bw-chip");
+        if (!chip) return;
+        const selected = chip.classList.contains("selected");
+        wrap.querySelectorAll(".bw-chip").forEach((c) => {
+          c.classList.remove("selected");
+          c.setAttribute("aria-pressed", "false");
+        });
+        if (!(toggle && selected)) {
+          chip.classList.add("selected");
+          chip.setAttribute("aria-pressed", "true");
+          state[key] = chip.dataset.val;
+        } else {
+          state[key] = "";
         }
+        if (required) setErr(key === "size" ? "size" : key, "");
+        syncSummary();
+      });
+    };
+    wireChips("bwSize", "size", { required: true });
+    wireChips("bwCond", "cond", { toggle: true });
+    wireChips("bwPref", "pref");
+
+    // --- date strip: next 7 days
+    const datesEl = document.getElementById("bwDates");
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const days = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() + i);
+      days.push(d);
+    }
+    datesEl.innerHTML = days
+      .map((d, i) => {
+        const small = i === 0 ? "Today" : i === 1 ? "Tmrw" : dayNames[d.getDay()];
+        return `<button type="button" class="bw-date" data-i="${i}" aria-pressed="false"><small>${small}</small><b>${d.getDate()}</b></button>`;
+      })
+      .join("");
+    datesEl.addEventListener("click", (e) => {
+      const btn = e.target.closest(".bw-date");
+      if (!btn) return;
+      datesEl.querySelectorAll(".bw-date").forEach((b) => { b.classList.remove("selected"); b.setAttribute("aria-pressed", "false"); });
+      btn.classList.add("selected");
+      btn.setAttribute("aria-pressed", "true");
+      const d = days[+btn.dataset.i];
+      state.date = d;
+      state.dateLabel = d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+      setErr("date", "");
+      syncSummary();
+    });
+
+    // --- time chips
+    const timesEl = document.getElementById("bwTimes");
+    const slots = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:30 PM", "3:00 PM", "4:30 PM"];
+    timesEl.innerHTML = slots
+      .map((t) => `<button type="button" class="bw-chip" data-val="${t}" aria-pressed="false">${t}</button>`)
+      .join("");
+    timesEl.addEventListener("click", (e) => {
+      const chip = e.target.closest(".bw-chip");
+      if (!chip) return;
+      timesEl.querySelectorAll(".bw-chip").forEach((c) => { c.classList.remove("selected"); c.setAttribute("aria-pressed", "false"); });
+      chip.classList.add("selected");
+      chip.setAttribute("aria-pressed", "true");
+      state.time = chip.dataset.val;
+      setErr("time", "");
+      syncSummary();
+    });
+
+    // --- text inputs
+    const carIn = document.getElementById("bwCar");
+    const nameIn = document.getElementById("bwName");
+    const phoneIn = document.getElementById("bwPhone");
+    const addrIn = document.getElementById("bwAddress");
+    const notesIn = document.getElementById("bwNotes");
+    carIn.addEventListener("input", () => { state.car = carIn.value.trim(); setErr("car", ""); syncSummary(); });
+    nameIn.addEventListener("input", () => { state.name = nameIn.value.trim(); setErr("name", ""); });
+    addrIn.addEventListener("input", () => { state.address = addrIn.value.trim(); setErr("address", ""); syncSummary(); });
+    notesIn.addEventListener("input", () => (state.notes = notesIn.value.trim()));
+    // phone formats as you type
+    phoneIn.addEventListener("input", () => {
+      const digits = phoneIn.value.replace(/\D/g, "").slice(0, 10);
+      let out = digits;
+      if (digits.length > 6) out = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+      else if (digits.length > 3) out = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+      else if (digits.length > 0) out = `(${digits}`;
+      phoneIn.value = out;
+      state.phone = out;
+      setErr("phone", "");
+    });
+
+    // --- live summary
+    const sum = {
+      vehicle: document.getElementById("sumVehicle"),
+      when: document.getElementById("sumWhen"),
+      where: document.getElementById("sumWhere"),
+    };
+    function syncSummary() {
+      sum.vehicle.textContent = [state.size, state.car].filter(Boolean).join(" · ") || "—";
+      sum.when.textContent = state.dateLabel && state.time ? `${state.dateLabel} · ${state.time}` : state.dateLabel || "—";
+      sum.where.textContent = state.address || "—";
+    }
+
+    // --- step engine
+    const goStep = (n) => {
+      current = n;
+      steps.forEach((st) => st.classList.toggle("active", +st.dataset.step === n));
+      labels.forEach((l) => {
+        const i = +l.dataset.step;
+        l.classList.toggle("active", i === n);
+        l.classList.toggle("done", i < n);
+      });
+      fill.style.width = `${(n / 3) * 100}%`;
+      const q = steps[n - 1].querySelector(".bw-q");
+      q && q.focus({ preventScroll: false });
+    };
+    const validateStep = (n) => {
+      let ok = true;
+      if (n === 1) {
+        if (!state.size) { setErr("size", "Pick your vehicle size."); ok = false; }
+        if (!state.car) { setErr("car", "What are we detailing?"); ok = false; }
+      } else if (n === 2) {
+        if (!state.date) { setErr("date", "Pick a day."); ok = false; }
+        if (!state.time) { setErr("time", "Pick a time."); ok = false; }
+      } else if (n === 3) {
+        if (!state.name) { setErr("name", "We need a name."); ok = false; }
+        if (state.phone.replace(/\D/g, "").length < 10) { setErr("phone", "Enter a valid phone number."); ok = false; }
+        if (!state.address) { setErr("address", "Where's the car?"); ok = false; }
+      }
+      return ok;
+    };
+    bwForm.addEventListener("click", (e) => {
+      if (e.target.closest(".bw-next")) {
+        if (validateStep(current)) goStep(current + 1);
+      } else if (e.target.closest(".bw-back")) {
+        goStep(current - 1);
       }
     });
 
-    if (!valid) {
-      firstInvalid?.focus();
-      return;
+    // --- confirm → ticket
+    const ticket = document.getElementById("bwTicket");
+    const progress = document.querySelector(".bw-progress");
+    bwForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!validateStep(3)) return;
+
+      document.getElementById("tkTitle").textContent = `You're booked, ${state.name.split(" ")[0]}!`;
+      document.getElementById("tkWhen").textContent = `${state.dateLabel} · ${state.time}`;
+      document.getElementById("tkVehicle").textContent = [state.size, state.car].filter(Boolean).join(" · ");
+      document.getElementById("tkWhere").textContent = state.address;
+      document.getElementById("bwIcs").href = makeIcs();
+
+      bwForm.hidden = true;
+      progress.hidden = true;
+      ticket.hidden = false;
+
+      // sparkle burst
+      if (!reduceMotion) {
+        const card = ticket.querySelector(".bw-ticket-card");
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => {
+            const sp = document.createElement("span");
+            sp.className = "bw-spark";
+            sp.textContent = i % 2 ? "✧" : "✦";
+            sp.style.left = `${8 + Math.random() * 84}%`;
+            sp.style.top = `${10 + Math.random() * 70}%`;
+            card.appendChild(sp);
+            setTimeout(() => sp.remove(), 950);
+          }, 200 + i * 90);
+        }
+      }
+      // payload is backend-ready:
+      // fetch("/api/bookings", { method: "POST", body: JSON.stringify(state) })
+    });
+
+    function makeIcs() {
+      const [hm, ap] = state.time.split(" ");
+      let [h, m] = hm.split(":").map(Number);
+      if (ap === "PM" && h !== 12) h += 12;
+      if (ap === "AM" && h === 12) h = 0;
+      const d = new Date(state.date);
+      d.setHours(h, m, 0, 0);
+      const endD = new Date(d.getTime() + 60 * 60 * 1000);
+      const fmt = (x) =>
+        `${x.getFullYear()}${String(x.getMonth() + 1).padStart(2, "0")}${String(x.getDate()).padStart(2, "0")}T${String(x.getHours()).padStart(2, "0")}${String(x.getMinutes()).padStart(2, "0")}00`;
+      const ics = [
+        "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Auto Glow//Booking//EN",
+        "BEGIN:VEVENT",
+        `UID:${Date.now()}@autoglow`,
+        `DTSTAMP:${fmt(new Date())}`,
+        `DTSTART:${fmt(d)}`,
+        `DTEND:${fmt(endD)}`,
+        `SUMMARY:Auto Glow — ${state.service} (${state.size})`,
+        `DESCRIPTION:${state.car} · We'll text ${state.phone} to confirm.`,
+        `LOCATION:${state.address.replace(/,/g, "\\,")}`,
+        "END:VEVENT", "END:VCALENDAR",
+      ].join("\r\n");
+      return URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
     }
-
-    const data = Object.fromEntries(new FormData(form).entries());
-    const niceDate = data.date
-      ? new Date(data.date + "T00:00:00").toLocaleDateString(undefined, {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-        })
-      : "";
-
-    modalBody.innerHTML =
-      `Thanks, <strong>${escapeHtml(data.name.split(" ")[0])}</strong>! Your ` +
-      `<strong>Express Detail</strong> for the ${escapeHtml(data.carMake)} ${escapeHtml(data.carModel)} ` +
-      `is requested for <strong>${escapeHtml(niceDate)}</strong> at <strong>${escapeHtml(data.time)}</strong>. ` +
-      `We'll text you at ${escapeHtml(data.phone)} to confirm.`;
-
-    openModal();
-    form.reset();
-    if (dateInput) dateInput.min = new Date().toISOString().split("T")[0];
-  });
-
-  // Clear errors as the user types
-  form.querySelectorAll("input, select").forEach((field) =>
-    field.addEventListener("input", () => clearError(field))
-  );
-
-  const openModal = () => {
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
-    modalClose.focus();
-  };
-  const closeModal = () => {
-    modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
-  };
-  modalClose.addEventListener("click", closeModal);
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
-  });
+  }
 
   // ===== Hero phone: clamped tilt + mini booking loop =====
   const scene = document.getElementById("phoneScene");
