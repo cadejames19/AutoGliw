@@ -514,7 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
             case "mute":
               firstTouch();
               muted = !muted;
-              muteBtn.textContent = muted ? "🔇" : "🔊";
+              muteBtn.classList.toggle("muted", muted);
               break;
           }
         });
@@ -522,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Drive in once and park for good
       if (reduceMotion) {
-        carDrive.classList.add("snap", "in", "parked", "lights-on");
+        carDrive.classList.add("snap", "in", "parked");
       } else {
         let carVisible = true;
         if ("IntersectionObserver" in window) {
@@ -534,9 +534,7 @@ document.addEventListener("DOMContentLoaded", () => {
           await wait(1950);
           carDrive.classList.remove("moving");
           carDrive.classList.add("parked");
-          await wait(700);
-          carDrive.classList.add("lights-on");
-          await wait(500);
+          await wait(900);
           carDrive.classList.add("shining");
           await wait(1600);
           carDrive.classList.remove("shining");
