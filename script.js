@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       (async () => {
         for (;;) {
-          while (!phoneVisible || document.hidden) await delay(600);
+          while (!phoneVisible || document.hidden || !screenEl.offsetParent) await delay(600);
           // Reset to the mini home page
           miniModal.classList.remove("open");
           screenEl.classList.remove("show-book");
@@ -314,6 +314,45 @@ document.addEventListener("DOMContentLoaded", () => {
           await delay(400);
         }
       })();
+    }
+
+    // --- Driving supercar: in from the right → park → lights → shine → out, loop
+    const carDrive = document.getElementById("carDrive");
+    if (carDrive) {
+      if (reduceMotion) {
+        carDrive.classList.add("snap", "in", "parked", "lights-on");
+      } else {
+        let carVisible = true;
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(([e]) => (carVisible = e.isIntersecting), { threshold: 0.1 }).observe(scene);
+        }
+        const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+        (async () => {
+          for (;;) {
+            while (!carVisible || document.hidden) await wait(600);
+            // Snap back to the right edge with no transition
+            carDrive.classList.add("snap");
+            carDrive.classList.remove("in", "out", "parked", "lights-on", "shining", "moving");
+            void carDrive.offsetWidth;
+            carDrive.classList.remove("snap");
+            await wait(80);
+            carDrive.classList.add("moving", "in"); // drive in
+            await wait(1800);
+            carDrive.classList.remove("moving");
+            carDrive.classList.add("parked"); // settle bounce + engine idle
+            await wait(700);
+            carDrive.classList.add("lights-on");
+            await wait(600);
+            carDrive.classList.add("shining"); // one-shot shine sweep
+            await wait(8000);
+            carDrive.classList.remove("parked", "shining");
+            carDrive.classList.add("moving", "out"); // drive off
+            await wait(1300);
+            carDrive.classList.remove("lights-on");
+            await wait(900);
+          }
+        })();
+      }
     }
   }
 

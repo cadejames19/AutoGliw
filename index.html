@@ -62,68 +62,147 @@
       <div class="hero-visual reveal">
         <div class="phone-scene" id="phoneScene">
           <div class="glow-pod" aria-hidden="true"></div>
-          <div class="car-behind" aria-hidden="true">
-          <svg class="car-illustration" viewBox="0 0 560 280" role="img" aria-label="Royal blue cartoon sports car">
-            <defs>
-              <linearGradient id="bodyGrad" x1="0" y1="0" x2="0.35" y2="1">
-                <stop offset="0" stop-color="#5b8cff" />
-                <stop offset="0.5" stop-color="#2f6bff" />
-                <stop offset="1" stop-color="#14307f" />
-              </linearGradient>
-              <linearGradient id="glassGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#2a3f78" />
-                <stop offset="1" stop-color="#0c1430" />
-              </linearGradient>
-              <linearGradient id="rimGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#eaf1ff" />
-                <stop offset="1" stop-color="#7ea4ff" />
-              </linearGradient>
-              <radialGradient id="headGrad" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0" stop-color="#ffffff" />
-                <stop offset="1" stop-color="#bfe0ff" />
-              </radialGradient>
-              <radialGradient id="carShadow" cx="0.5" cy="0.5" r="0.5">
-                <stop offset="0" stop-color="#02061e" stop-opacity="0.5" />
-                <stop offset="1" stop-color="#02061e" stop-opacity="0" />
-              </radialGradient>
-            </defs>
 
-            <ellipse cx="288" cy="236" rx="220" ry="20" fill="url(#carShadow)" />
+          <div class="car-lane" aria-hidden="true">
+            <div class="car-drive" id="carDrive">
+              <span class="streak st1"></span>
+              <span class="streak st2"></span>
+              <span class="streak st3"></span>
+              <div class="car-settle"><div class="car-vib">
+                <svg class="super-car" viewBox="0 0 760 330" role="img" aria-label="Royal blue supercar">
+                  <defs>
+                    <linearGradient id="scPaint" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#7ea6ff" />
+                      <stop offset="0.35" stop-color="#2f6bff" />
+                      <stop offset="0.75" stop-color="#16348f" />
+                      <stop offset="1" stop-color="#0a1542" />
+                    </linearGradient>
+                    <linearGradient id="scGlass" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#3d5a9e" />
+                      <stop offset="1" stop-color="#0a1233" />
+                    </linearGradient>
+                    <linearGradient id="scSkirt" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#142657" />
+                      <stop offset="1" stop-color="#060b1f" />
+                    </linearGradient>
+                    <linearGradient id="scRim" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0" stop-color="#f2f6ff" />
+                      <stop offset="1" stop-color="#8fa9e8" />
+                    </linearGradient>
+                    <radialGradient id="scHead" cx="0.3" cy="0.5" r="0.8">
+                      <stop offset="0" stop-color="#ffffff" />
+                      <stop offset="1" stop-color="#9fc4ff" />
+                    </radialGradient>
+                    <linearGradient id="scBeamG" x1="1" y1="0" x2="0" y2="0">
+                      <stop offset="0" stop-color="#cfe4ff" stop-opacity="0.5" />
+                      <stop offset="1" stop-color="#cfe4ff" stop-opacity="0" />
+                    </linearGradient>
+                    <linearGradient id="scSweepG" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
+                      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.5" />
+                      <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+                    </linearGradient>
+                    <radialGradient id="scShadow" cx="0.5" cy="0.5" r="0.5">
+                      <stop offset="0" stop-color="#01030f" stop-opacity="0.6" />
+                      <stop offset="1" stop-color="#01030f" stop-opacity="0" />
+                    </radialGradient>
+                    <linearGradient id="reflFade" x1="0" y1="250" x2="0" y2="318" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85" />
+                      <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+                    </linearGradient>
+                    <mask id="reflMask"><rect x="-100" y="248" width="960" height="90" fill="url(#reflFade)" /></mask>
+                    <clipPath id="scBodyClip"><use href="#scBodyPath" /></clipPath>
+                  </defs>
 
-            <!-- body -->
-            <path d="M52 168 C46 150 58 142 80 140 C96 118 120 112 150 110 C175 96 205 86 250 84 L320 84 C360 84 386 96 404 120 C430 128 460 132 478 138 C502 144 514 150 514 166 C514 178 506 182 494 182 L88 182 C68 182 56 180 52 168 Z" fill="url(#bodyGrad)" stroke="#0c1f57" stroke-width="2" />
+                  <ellipse cx="370" cy="250" rx="310" ry="16" fill="url(#scShadow)" />
 
-            <!-- gloss highlight -->
-            <path d="M120 120 C180 96 260 90 330 92 C372 94 398 104 416 122 L404 127 C386 109 360 100 326 99 C258 97 184 103 132 125 Z" fill="#ffffff" opacity="0.14" />
+                  <g id="scCar">
+                    <!-- headlight beam (hidden until lights-on) -->
+                    <polygon class="beam" points="52,180 -150,140 -150,232 56,208" fill="url(#scBeamG)" />
 
-            <!-- glass -->
-            <path d="M176 116 C196 95 222 88 252 87 L316 87 C344 89 362 100 376 116 Z" fill="url(#glassGrad)" />
-            <path d="M262 87 L262 116" stroke="#0c1f57" stroke-width="6" stroke-linecap="round" />
-            <path d="M196 112 L226 92 L246 92 L210 116 Z" fill="#ffffff" opacity="0.18" />
-            <path d="M300 112 L330 92 L344 96 L318 116 Z" fill="#ffffff" opacity="0.12" />
+                    <!-- body -->
+                    <path id="scBodyPath" d="M58,224 C44,216 38,202 46,190 C54,177 72,170 96,166 C150,156 204,150 260,146 C284,112 314,95 352,92 L462,90 C496,90 520,95 544,103 C580,115 612,127 640,137 L670,133 C682,131 690,138 692,148 C694,165 690,184 680,197 C672,212 658,222 642,226 L96,230 C78,230 64,229 58,224 Z" fill="url(#scPaint)" stroke="#081538" stroke-width="2" />
 
-            <!-- beltline, door, handle -->
-            <path d="M150 122 L470 138" stroke="#0c1f57" stroke-width="2" opacity="0.5" fill="none" />
-            <path d="M276 120 L276 180" stroke="#0c1f57" stroke-width="2" opacity="0.45" />
-            <rect x="296" y="130" width="22" height="7" rx="3.5" fill="#0c1f57" opacity="0.6" />
+                    <!-- skirt + wheel arches (clipped inside the body) -->
+                    <g clip-path="url(#scBodyClip)">
+                      <rect x="90" y="212" width="520" height="20" fill="url(#scSkirt)" />
+                      <circle cx="190" cy="198" r="60" fill="#050a1c" />
+                      <circle cx="560" cy="198" r="62" fill="#050a1c" />
+                      <path d="M46,190 C38,198 36,210 44,220 C52,228 64,229 70,226 C58,216 52,202 54,190 Z" fill="#0d1d52" />
+                    </g>
 
-            <!-- lights -->
-            <path d="M498 148 C508 148 512 154 512 160 L498 162 Z" fill="url(#headGrad)" />
-            <circle cx="505" cy="155" r="11" fill="#cfe7ff" opacity="0.45" />
-            <path d="M60 150 L78 150 L78 160 L58 160 Z" fill="#ff5b6e" />
+                    <!-- canopy glass -->
+                    <path d="M272,142 C294,113 318,98 354,95 L458,93 C488,93 510,98 532,105 C516,124 496,135 468,139 C414,145 330,145 272,142 Z" fill="url(#scGlass)" stroke="#081538" stroke-width="1.5" />
+                    <path d="M300,135 L340,100 L356,100 L312,138 Z" fill="#ffffff" opacity="0.13" />
+                    <path d="M380,140 L420,97 L432,98 L394,140 Z" fill="#ffffff" opacity="0.09" />
 
-            <!-- wheels -->
-            <circle cx="160" cy="180" r="41" fill="#070b16" />
-            <circle cx="410" cy="180" r="41" fill="#070b16" />
-            <circle cx="160" cy="180" r="36" fill="#0c111f" />
-            <circle cx="410" cy="180" r="36" fill="#0c111f" />
-            <circle cx="160" cy="180" r="21" fill="url(#rimGrad)" />
-            <circle cx="410" cy="180" r="21" fill="url(#rimGrad)" />
-            <circle cx="160" cy="180" r="14" fill="none" stroke="#2f6bff" stroke-width="3" />
-            <circle cx="410" cy="180" r="14" fill="none" stroke="#2f6bff" stroke-width="3" />
-            <circle cx="160" cy="180" r="6" fill="#14307f" />
-            <circle cx="410" cy="180" r="6" fill="#14307f" />
-          </svg>
+                    <!-- creases & highlights -->
+                    <path d="M70,190 C170,176 330,168 520,158 C570,155 620,148 660,140" stroke="#cfe0ff" stroke-width="2.5" opacity="0.2" fill="none" />
+                    <path d="M100,168 C160,158 220,152 256,148" stroke="#ffffff" stroke-width="2" opacity="0.25" fill="none" />
+                    <path d="M262,148 C360,150 470,146 540,136" stroke="#081538" stroke-width="1.5" opacity="0.5" fill="none" />
+                    <path d="M398,146 C404,176 402,206 394,228" stroke="#081538" stroke-width="1.5" opacity="0.45" fill="none" />
+
+                    <!-- mirror, intake -->
+                    <path d="M276,136 L262,126 L250,128 L262,140 Z" fill="url(#scPaint)" stroke="#081538" stroke-width="1" />
+                    <path d="M478,160 L514,154 L522,188 L486,193 Z" fill="#0a1430" opacity="0.9" />
+
+                    <!-- front fascia -->
+                    <g class="headlight">
+                      <path d="M50,182 L96,174 L102,182 L58,190 Z" fill="url(#scHead)" />
+                      <path d="M52,192 L98,184" stroke="#bfe0ff" stroke-width="2" opacity="0.8" fill="none" />
+                    </g>
+                    <path d="M50,206 L100,201 L104,216 L58,221 Z" fill="#050b20" />
+                    <path d="M44,222 L106,218 L108,226 L52,229 Z" fill="#0a132e" />
+
+                    <!-- tail -->
+                    <path d="M678,148 L692,150 L690,168 L676,166 Z" fill="#ff4660" />
+                    <circle cx="684" cy="158" r="10" fill="#ff4660" opacity="0.3" />
+                    <circle cx="652" cy="232" r="5" fill="#0b1126" stroke="#44507a" stroke-width="1.5" />
+                    <circle cx="666" cy="231" r="5" fill="#0b1126" stroke="#44507a" stroke-width="1.5" />
+
+                    <!-- shine sweep (runs after parking) -->
+                    <g clip-path="url(#scBodyClip)"><rect class="sweep" x="20" y="60" width="170" height="190" fill="url(#scSweepG)" /></g>
+
+                    <!-- wheels -->
+                    <g transform="translate(190,198)">
+                      <circle r="50" fill="#0a0e1a" />
+                      <circle r="50" fill="none" stroke="#02050f" stroke-width="3" />
+                      <circle r="35" fill="#0c1224" />
+                      <rect x="20" y="-15" width="11" height="30" rx="4" fill="#2f6bff" opacity="0.85" />
+                      <g class="spokes" fill="url(#scRim)">
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(72)" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(144)" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(216)" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(288)" />
+                      </g>
+                      <circle r="34" fill="none" stroke="#8fa9e8" stroke-width="2.5" opacity="0.9" />
+                      <circle r="9" fill="#0d1326" stroke="url(#scRim)" stroke-width="2" />
+                      <circle r="3.5" fill="#2f6bff" />
+                    </g>
+                    <g transform="translate(560,198)">
+                      <circle r="50" fill="#0a0e1a" />
+                      <circle r="50" fill="none" stroke="#02050f" stroke-width="3" />
+                      <circle r="35" fill="#0c1224" />
+                      <rect x="20" y="-15" width="11" height="30" rx="4" fill="#2f6bff" opacity="0.85" />
+                      <g class="spokes" fill="url(#scRim)">
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(72)" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(144)" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(216)" />
+                        <path d="M-4,-32 L4,-32 L7,-7 L-7,-7 Z" transform="rotate(288)" />
+                      </g>
+                      <circle r="34" fill="none" stroke="#8fa9e8" stroke-width="2.5" opacity="0.9" />
+                      <circle r="9" fill="#0d1326" stroke="url(#scRim)" stroke-width="2" />
+                      <circle r="3.5" fill="#2f6bff" />
+                    </g>
+                  </g>
+
+                  <!-- showroom-floor reflection -->
+                  <use href="#scCar" transform="translate(0,500) scale(1,-1)" mask="url(#reflMask)" opacity="0.16" />
+                </svg>
+              </div></div>
+            </div>
           </div>
 
           <div class="phone-tilt" id="phoneTilt">
@@ -197,10 +276,6 @@
           <span class="sparkle s2">✧</span>
           <span class="sparkle s3">✦</span>
           <span class="sparkle s4">✧</span>
-          <div class="price-tag">
-            <span class="price-label">Express Detail</span>
-            <span class="price-value">$80</span>
-          </div>
         </div>
       </div>
     </div>
