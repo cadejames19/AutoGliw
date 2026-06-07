@@ -316,9 +316,211 @@ document.addEventListener("DOMContentLoaded", () => {
       })();
     }
 
-    // --- Driving supercar: in from the right → park → lights → shine → out, loop
+    // --- Driving supercar: drives in once, parks, then it's an interactive showpiece
     const carDrive = document.getElementById("carDrive");
-    if (carDrive) {
+    const superCar = document.getElementById("superCar");
+    if (carDrive && superCar) {
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      // -- Synthesized sound (enabled by first user gesture, mutable)
+      let actx = null;
+      let muted = false;
+      const ensureAudio = () => {
+        if (!actx) {
+          try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { /* no audio */ }
+        }
+        if (actx && actx.state === "suspended") actx.resume();
+      };
+      const tone = (type, f0, f1, dur, vol = 0.15) => {
+        if (!actx || muted) return;
+        const o = actx.createOscillator();
+        const g = actx.createGain();
+        o.type = type;
+        o.frequency.setValueAtTime(f0, actx.currentTime);
+        if (f1) o.frequency.exponentialRampToValueAtTime(f1, actx.currentTime + dur);
+        g.gain.setValueAtTime(vol, actx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + dur);
+        o.connect(g).connect(actx.destination);
+        o.start();
+        o.stop(actx.currentTime + dur);
+      };
+      const noiseBurst = (dur, vol, freq) => {
+        if (!actx || muted) return;
+        const n = Math.floor(actx.sampleRate * dur);
+        const buf = actx.createBuffer(1, n, actx.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+        const src = actx.createBufferSource();
+        src.buffer = buf;
+        const f = actx.createBiquadFilter();
+        f.type = "lowpass";
+        f.frequency.value = freq;
+        const g = actx.createGain();
+        g.gain.setValueAtTime(vol, actx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + dur);
+        src.connect(f).connect(g).connect(actx.destination);
+        src.start();
+      };
+      const sfx = {
+        doorOpen: () => { noiseBurst(0.4, 0.07, 500); tone("sine", 140, 90, 0.35, 0.12); },
+        doorClose: () => { tone("sine", 95, 55, 0.16, 0.3); noiseBurst(0.08, 0.2, 250); },
+        window: () => noiseBurst(0.55, 0.05, 1200),
+        wheel: () => noiseBurst(0.3, 0.08, 800),
+        lights: () => tone("sine", 880, 1320, 0.08, 0.06),
+        rev: () => {
+          tone("sawtooth", 75, 190, 0.55, 0.22);
+          noiseBurst(0.5, 0.05, 300);
+          setTimeout(() => tone("sawtooth", 185, 65, 0.8, 0.18), 520);
+        },
+        horn: () => {
+          const blast = () => { tone("square", 466, 0, 0.18, 0.1); tone("square", 554, 0, 0.18, 0.1); };
+          blast();
+          setTimeout(blast, 260);
+        },
+        backfire: () => { noiseBurst(0.18, 0.5, 180); tone("square", 160, 40, 0.22, 0.25); },
+      };
+
+      // -- Hint caption: fades after first interaction
+      const hint = document.getElementById("carHint");
+      const firstTouch = () => {
+        ensureAudio();
+        if (hint) hint.classList.add("hide");
+      };
+
+      // -- Interactions
+      const doorEl = superCar.querySelector(".sc-door");
+      const lightsEl = superCar.querySelector(".headlight");
+      const bodyEl = superCar.querySelector("#scBodyPath");
+      const sparksEl = superCar.querySelector(".wipe-sparks");
+      const wipeEl = superCar.querySelector(".wipe");
+
+      const toggleDoor = () => {
+        firstTouch();
+        const opening = !carDrive.classList.contains("door-open");
+        carDrive.classList.toggle("door-open", opening);
+        carDrive.classList.toggle("win-down", opening); // frameless glass drops with the door
+        opening ? sfx.doorOpen() : sfx.doorClose();
+      };
+      const toggleWin = () => {
+        firstTouch();
+        carDrive.classList.toggle("win-down");
+        sfx.window();
+      };
+      const toggleLights = () => {
+        firstTouch();
+        carDrive.classList.toggle("lights-on");
+        sfx.lights();
+      };
+      const spinWheel = (wheel) => {
+        firstTouch();
+        wheel.classList.remove("spin-burst");
+        void wheel.getBoundingClientRect();
+        wheel.classList.add("spin-burst");
+        setTimeout(() => wheel.classList.remove("spin-burst"), 750);
+        sfx.wheel();
+      };
+      const bounceCar = () => {
+        firstTouch();
+        carDrive.classList.remove("bounce");
+        void carDrive.offsetWidth;
+        carDrive.classList.add("bounce");
+        setTimeout(() => carDrive.classList.remove("bounce"), 850);
+      };
+
+      const spawnSpark = (x, y) => {
+        if (!sparksEl) return;
+        const c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", 2.6);
+        c.setAttribute("fill", "#ffffff");
+        c.setAttribute("class", "spark");
+        sparksEl.appendChild(c);
+        setTimeout(() => c.remove(), 700);
+      };
+
+      // Rev + 3x-fast-rev backfire easter egg
+      let revving = false;
+      const revTimes = [];
+      const rev = () => {
+        firstTouch();
+        if (revving) return;
+        revving = true;
+        carDrive.classList.add("revving");
+        sfx.rev();
+        revTimes.push(Date.now());
+        while (revTimes.length > 3) revTimes.shift();
+        const combo = revTimes.length === 3 && Date.now() - revTimes[0] < 5200;
+        setTimeout(() => {
+          carDrive.classList.remove("revving");
+          revving = false;
+          if (combo) {
+            revTimes.length = 0;
+            carDrive.classList.add("backfire", "bounce");
+            sfx.backfire();
+            for (let i = 0; i < 14; i++) {
+              setTimeout(() => spawnSpark(80 + Math.random() * 560, 95 + Math.random() * 130), i * 55);
+            }
+            setTimeout(() => carDrive.classList.remove("backfire", "bounce"), 900);
+          }
+        }, 1400);
+      };
+      const horn = () => {
+        firstTouch();
+        carDrive.classList.add("honk");
+        sfx.horn();
+        setTimeout(() => carDrive.classList.remove("honk"), 750);
+      };
+
+      doorEl.addEventListener("click", (e) => { e.stopPropagation(); toggleDoor(); });
+      lightsEl.addEventListener("click", (e) => { e.stopPropagation(); toggleLights(); });
+      superCar.querySelectorAll(".wheel").forEach((w) =>
+        w.addEventListener("click", (e) => { e.stopPropagation(); spinWheel(w); })
+      );
+      bodyEl.addEventListener("click", bounceCar);
+
+      // Polish wipe: sweep + sparkles follow the cursor across the body
+      let wipeTimer = null;
+      let lastSparkX = null;
+      bodyEl.addEventListener("pointermove", (e) => {
+        if (!wipeEl) return;
+        const pt = superCar.createSVGPoint();
+        pt.x = e.clientX;
+        pt.y = e.clientY;
+        const p = pt.matrixTransform(superCar.getScreenCTM().inverse());
+        wipeEl.style.transform = `translateX(${(p.x - 45).toFixed(1)}px)`;
+        wipeEl.style.opacity = "0.9";
+        clearTimeout(wipeTimer);
+        wipeTimer = setTimeout(() => (wipeEl.style.opacity = "0"), 220);
+        if (lastSparkX === null || Math.abs(p.x - lastSparkX) > 70) {
+          lastSparkX = p.x;
+          spawnSpark(p.x, p.y - 10);
+        }
+      });
+
+      // Control pill
+      const panel = document.getElementById("carPanel");
+      const muteBtn = document.getElementById("muteBtn");
+      if (panel) {
+        panel.addEventListener("click", (e) => {
+          const btn = e.target.closest("button");
+          if (!btn) return;
+          switch (btn.dataset.act) {
+            case "door": toggleDoor(); break;
+            case "win": toggleWin(); break;
+            case "lights": toggleLights(); break;
+            case "rev": rev(); break;
+            case "horn": horn(); break;
+            case "mute":
+              firstTouch();
+              muted = !muted;
+              muteBtn.textContent = muted ? "🔇" : "🔊";
+              break;
+          }
+        });
+      }
+
+      // Drive in once and park for good
       if (reduceMotion) {
         carDrive.classList.add("snap", "in", "parked", "lights-on");
       } else {
@@ -326,31 +528,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if ("IntersectionObserver" in window) {
           new IntersectionObserver(([e]) => (carVisible = e.isIntersecting), { threshold: 0.1 }).observe(scene);
         }
-        const wait = (ms) => new Promise((r) => setTimeout(r, ms));
         (async () => {
-          for (;;) {
-            while (!carVisible || document.hidden) await wait(600);
-            // Snap back to the right edge with no transition
-            carDrive.classList.add("snap");
-            carDrive.classList.remove("in", "out", "parked", "lights-on", "shining", "moving");
-            void carDrive.offsetWidth;
-            carDrive.classList.remove("snap");
-            await wait(80);
-            carDrive.classList.add("moving", "in"); // drive in
-            await wait(1800);
-            carDrive.classList.remove("moving");
-            carDrive.classList.add("parked"); // settle bounce + engine idle
-            await wait(700);
-            carDrive.classList.add("lights-on");
-            await wait(600);
-            carDrive.classList.add("shining"); // one-shot shine sweep
-            await wait(8000);
-            carDrive.classList.remove("parked", "shining");
-            carDrive.classList.add("moving", "out"); // drive off
-            await wait(1300);
-            carDrive.classList.remove("lights-on");
-            await wait(900);
-          }
+          while (!carVisible || document.hidden) await wait(600);
+          carDrive.classList.add("moving", "in");
+          await wait(1950);
+          carDrive.classList.remove("moving");
+          carDrive.classList.add("parked");
+          await wait(700);
+          carDrive.classList.add("lights-on");
+          await wait(500);
+          carDrive.classList.add("shining");
+          await wait(1600);
+          carDrive.classList.remove("shining");
         })();
       }
     }
