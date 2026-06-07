@@ -624,8 +624,14 @@ img, svg { display: block; }
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; text-align: center; }
-  .hero-copy { order: 2; }
-  .hero-visual { order: 1; }
+  /* phone sits below the headline + subtext on mobile */
+  .hero-copy { display: contents; }
+  .eyebrow { order: 1; }
+  .hero h1 { order: 2; }
+  .hero-sub { order: 3; }
+  .hero-visual { order: 4; }
+  .hero-actions { order: 5; }
+  .hero-stats { order: 6; }
   .hero-actions, .hero-stats { justify-content: center; }
   .hero-sub { margin-left: auto; margin-right: auto; }
   .service-grid, .why-grid, .bw-card { grid-template-columns: 1fr; }
